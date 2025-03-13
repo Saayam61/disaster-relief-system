@@ -1,0 +1,28 @@
+# Laravel
+/vendor
+/node_modules
+/public/storage
+/storage/*.key
+.env
+.env.*
+.idea
+/.vscode
+.phpunit.result.cache
+/.php_cs.cache
+
+# Flutter/Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+
+# AI
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.h5
