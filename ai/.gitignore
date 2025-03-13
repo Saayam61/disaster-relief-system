@@ -1,0 +1,7 @@
+# AI
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.h5
