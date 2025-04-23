@@ -1,0 +1,241 @@
+S.No.,Basin Name,Station Name,District,1 hour,3 hour,6 hour,12 hour,24 hour,Status
+1,Narayani,Archale,Palpa,0,0,0,0,0,BELOW WARNING LEVEL
+2,Koshi,Sundarpur,Udayapur,0,0,0,0,0,BELOW WARNING LEVEL
+3,Mohana,Dhangadhi airport,Kailali,0,0,0,0,0,BELOW WARNING LEVEL
+4,Bagmati,Sundarijal,Kathmandu,0,0,0,0,0,BELOW WARNING LEVEL
+5,Kankai,Anarmani Birta,Jhapa,0,0,0,0,0,BELOW WARNING LEVEL
+6,Koshi,Dhap (Tarnamlang),Sindhupaichowk,0,0,0,0,0,BELOW WARNING LEVEL
+7,Mahakali,Sundarpur,Kanchanpur,0,0,2,2,2.2,BELOW WARNING LEVEL
+8,West Rapti,Dhakeri,Banke,0,0,0,0,0,BELOW WARNING LEVEL
+9,Tinau,Baldyanggadi,Palpa,0,0,0,0,0,BELOW WARNING LEVEL
+10,Karnali,Surkhet Airport (Birendranagar),Surkhet,0,0,0,0,0,BELOW WARNING LEVEL
+11,Karnali,Daulatpur,Bardiya,0,0,0,0,0,BELOW WARNING LEVEL
+12,Mahakali,Darchula New,Darchula,0,0,0,0,0,BELOW WARNING LEVEL
+13,Narayani,Darbang,Myagdi,0,0,0,0,0,BELOW WARNING LEVEL
+15,Karnali,Surkhet at Ratanangla,Surkhet,0,1,2.2,2.2,2.4,BELOW WARNING LEVEL
+16,Karnali,Aurahikhola at Godana,Bardiya,0,0,0,0,0,BELOW WARNING LEVEL
+17,Narayani,Danda,Nawalparasi East,0,0,0,0,0,BELOW WARNING LEVEL
+18,Koshi,Tumlingtar,Sankhuwasabha,0,0,0,0,0,BELOW WARNING LEVEL
+19,Narayani,Daman,Makwanpur,0,0,0,0,0,BELOW WARNING LEVEL
+20,Koshi,Arun at Turkeghat,Sankhuwasabha,0,0,0,0,0,BELOW WARNING LEVEL
+21,Bagmati,Dhap Dam AWS,Kathmandu,0,0,0,0,0,BELOW WARNING LEVEL
+22,Kankai,Soktim Tea State,Illam,0,0,0,0,0,BELOW WARNING LEVEL
+23,Balan-Khado,Dhodhana,Siraha,0,0,0,0,0,BELOW WARNING LEVEL
+24,Karnali,Gamadi Shree Nagar,Mugu,0,0.4,0.6,0.6,2.6,BELOW WARNING LEVEL
+25,Narayani,Aadhi Khola at Borlangpul (Rainfall),Syangja,0,0,0,0,0,BELOW WARNING LEVEL
+26,Narayani,Gajuri,Dhading,0,0,0,0,0,BELOW WARNING LEVEL
+28,Mahakali,Gaira,Doti,0,0,0.2,0.2,0.2,BELOW WARNING LEVEL
+29,Narayani,Sikles,Kaski,0,0,0,0,0,BELOW WARNING LEVEL
+30,West Rapti,Sikta,Banke,0,0,0,0,0,BELOW WARNING LEVEL
+31,Bagmati,Simara Airport_AWS,Bara,0,0,0,0,0,BELOW WARNING LEVEL
+33,Koshi,Aiselukhark,Khotang,0,0,0,0,0,BELOW WARNING LEVEL
+34,Bagmati,SindhuliGadi,Sindhuli,0,0,0,0,0,BELOW WARNING LEVEL
+35,Narayani,Amlekhganj,Bara,0,0,0,0,0,BELOW WARNING LEVEL
+36,Kankai,Damak,Jhapa,0,0,0,0,0,BELOW WARNING LEVEL
+37,Koshi,Singati,Dolakha,0,0,0,0,0,BELOW WARNING LEVEL
+38,Narayani,Dumkauli,Nawalparasi East,0,0,0,0,2.2,BELOW WARNING LEVEL
+39,Kamala,Dudhauli,Sindhuli,0,0,0,0,0,BELOW WARNING LEVEL
+40,Koshi,Dudh Koshi at Rabuwabazar,Khotang,0,0,0,0,0,BELOW WARNING LEVEL
+41,Koshi,Dovan,Taplejung,0,0,0,0,0.2,BELOW WARNING LEVEL
+42,Mahakali,Dodhara,Kanchanpur,0,0,1.4,1.8,1.8,BELOW WARNING LEVEL
+44,Narayani,Anp Chour,Gulmi,0,0,0,0,0.6,BELOW WARNING LEVEL
+45,Kamala,Siraha_Hydro,Siraha,0,0,0,0,0,BELOW WARNING LEVEL
+46,Mechi,Sisne (Arjundhara),Jhapa,0,0,0,0,0,BELOW WARNING LEVEL
+47,Narayani,Dhunibesi,Dhading,0,0,0,0,0,BELOW WARNING LEVEL
+48,Koshi,Dhunge,Sindhupalchowk,0,0,0,0,0,BELOW WARNING LEVEL
+49,Koshi,Dhulikhel,Kavrepalanchowk,0,0,0,0,0,BELOW WARNING LEVEL
+50,Koshi,Duwachaur,Sindhupalchok,0,0,0,0,0,BELOW WARNING LEVEL
+52,West Rapti,Swargdwari,Pyuthan,0,0,0,0,0,BELOW WARNING LEVEL
+53,Bagmati,Tikathali,Lalitpur,0,0,0,0,0,BELOW WARNING LEVEL
+54,Koshi,Bahrabise,Sindhupalchok,0,0,0,0,0,BELOW WARNING LEVEL
+55,Koshi,Terhathum,Terhathum,0,0,0,0,0,BELOW WARNING LEVEL
+56,Narayani,Thakmarpha,Mustang,0,0,0,0,0,BELOW WARNING LEVEL
+58,Koshi,Tribeni (Dhankuta),Dhankuta,0,0,0,0,0,BELOW WARNING LEVEL
+59,Koshi,Bhotang,Sindhupalchowk,0,0,0,0,0,BELOW WARNING LEVEL
+60,Bagmati,Bhorleni,Makawanpur,0,0,0,0,0,BELOW WARNING LEVEL
+61,Koshi,Bhojpur,Bhojpur,0,0,0,0,0,BELOW WARNING LEVEL
+62,Tinau,Tilottama,Rupandehi,0,0,0,0,0,BELOW WARNING LEVEL
+63,Keshaliya,Bahuni,Morang,0,0,0,0,0,BELOW WARNING LEVEL
+64,Narayani,Bharse,Gulmi,0,0,0,0,0.4,BELOW WARNING LEVEL
+65,Tinau,Bhairahawa_AWOS_10,Rupandehi,0,0,0,0,0,BELOW WARNING LEVEL
+66,Narayani,Bimalnagar (Rainfall),Tanahu,0,0,0,0,0,BELOW WARNING LEVEL
+67,Banganga,Bhagwanpur,Kapilvastu,0,0,0,0,0,BELOW WARNING LEVEL
+69,Koshi,Bedding Rainfall,Dolakha,0,0,0,0,0,BELOW WARNING LEVEL
+70,Koshi,Baunepati,Sindhupalchok,0,0,0,0,0,BELOW WARNING LEVEL
+71,Karnali,Bajura,Bajura,0,0.4,1.2,1.2,3.2,BELOW WARNING LEVEL
+72,Mechi,Barphalyang,Illam,0,0,0,0,0,BELOW WARNING LEVEL
+73,Narayani,Barpak,Gorkha,0,0,0,0,0,BELOW WARNING LEVEL
+74,Koshi,Barmajhiya,Saptari,0,0,0,0,0,BELOW WARNING LEVEL
+75,Koshi,Banskharka,Sindhupalchok,0,0,0,0,0,BELOW WARNING LEVEL
+76,Mohana,Tikapur,Kailali,0,0,0.2,0.2,0.2,BELOW WARNING LEVEL
+77,Narayani,Bandipur,Tanahu,0,0,0,0,0,BELOW WARNING LEVEL
+78,Mohana,Baliya,Kailali,0,0,0,0,0,BELOW WARNING LEVEL
+79,Mechi,Bahundangi,Jhapa,0,0,0,0,0,BELOW WARNING LEVEL
+80,Karnali,Dailekh_AWS,Dailekh,0,1.2,1.2,1.2,1.2,BELOW WARNING LEVEL
+81,Bagmati,Tathali,Bhaktapur,0,0,0,0,0,BELOW WARNING LEVEL
+82,Koshi,Tarke Ghyang,Sindhupalchok,0,0,0,0,0,BELOW WARNING LEVEL
+83,Koshi,Syangboche Airport,Solukhumbu,0,0,0,0,0,BELOW WARNING LEVEL
+84,Mahakali,Dadeldhura_AWS,Dadeldhura,0,4.4,4.8,4.8,10.4,BELOW WARNING LEVEL
+85,Balan-Khado,Chure Mai,Udayapur,0,0,0,0,0,BELOW WARNING LEVEL
+86,Bagmati,Babarmahal (DHM Office),Kathmandu,0,0,0,0,0,BELOW WARNING LEVEL
+87,Mohana,Bachila,Kailali,0,0,0,0,0,BELOW WARNING LEVEL
+88,Narayani,Syangja,Syangja,0,0,0,0,0,BELOW WARNING LEVEL
+89,Narayani,Chisapanigadi,Makwanpur,0,0,0,0,0,BELOW WARNING LEVEL
+90,Narayani,Badigad at Rudrabeni,Gulmi,0,0,0,0,1.4,BELOW WARNING LEVEL
+91,,Taal,Manang,0,0,0,0,0.8,BELOW WARNING LEVEL
+92,West Rapti,Bagasoti,Dang,0,0,0,0,0,BELOW WARNING LEVEL
+93,Narayani,Takukot,Gorkha,0,0,0,0,0,BELOW WARNING LEVEL
+95,Narayani,Birganj,Parsa,0,0,0,0,0,BELOW WARNING LEVEL
+96,Narayani,Baglung,Baglung,0,0,0,0,0,BELOW WARNING LEVEL
+97,Karnali,Chautha,Jumla,0,0,0,0,4.8,BELOW WARNING LEVEL
+98,Narayani,Gandakot,Palpa,0,0,0,0,0,BELOW WARNING LEVEL
+99,Narayani,Tamghas_AWS,Gulmi,0,0,0,0,3.8,BELOW WARNING LEVEL
+100,Mahakali,Chaurbandale,Dadeldhura,0,0.6,0.8,0.8,1.4,BELOW WARNING LEVEL
+101,Koshi,Taplejung,Taplejung,0,0,0,0,0,BELOW WARNING LEVEL
+102,Keshaliya,Tarahara,Sunsari,0,0,0,0,0,BELOW WARNING LEVEL
+103,Mechi,Chandragadi Airport,Jhapa,0,0,0,0,0,BELOW WARNING LEVEL
+104,Koshi,Chandarku,Sindhupalchowk,0,0,0,0,0,BELOW WARNING LEVEL
+106,Bagmati,BudhanilKantha,Kathmandu,0,0,0,0,0,BELOW WARNING LEVEL
+107,Koshi,Bolde,Sindhupalchok,0,0,0,0,0,BELOW WARNING LEVEL
+108,Koshi,Tamakoshi at Busti,Dolakha,0,0,0,0,0,BELOW WARNING LEVEL
+109,Narayani,Shilinge,Makwanpur,0,0,0,0,0,BELOW WARNING LEVEL
+110,Koshi,Gobre,Sindhupalchok,0,0,0,0,0,BELOW WARNING LEVEL
+111,Bagmati,Gaur,Rautahat,0,0,0,0,0,BELOW WARNING LEVEL
+112,Narayani,MachhapuchhreBaseCamp_Snow,Kaski,0,0,0.94,0.94,11.71,BELOW WARNING LEVEL
+113,Koshi,Panchkhal,Kavrepalanchowk,0,0,0,0,0,BELOW WARNING LEVEL
+114,Narayani,Lumle,Kaski,0,0,0,0,0,BELOW WARNING LEVEL
+115,Tinau,Lumbini,Rupandehi,0,0,0,0,0,BELOW WARNING LEVEL
+116,Bagmati,Panipokhari (Kathmandu),Kathmandu,0,0,0,0,0,BELOW WARNING LEVEL
+117,Koshi,Lukla Airport,Solukhumbhu,0,0,0,0,0,BELOW WARNING LEVEL
+118,Narayani,Pansayakhola,Nuwakot,0,0,0,0,0,BELOW WARNING LEVEL
+119,Narayani,Parasi,Nawalparasi,0,0,0,0,0,BELOW WARNING LEVEL
+120,West Rapti,Liwang,Rolpa,0,0,0,0,0.2,BELOW WARNING LEVEL
+121,West Rapti,Libang Gaun,Rolpa,0,0,0,0,0,BELOW WARNING LEVEL
+122,Bagmati,Lele,Lalitpur,0,0,0,0,0,BELOW WARNING LEVEL
+123,Koshi,Leguwa Ghat,Dhankuta,0,0,0,0,0,BELOW WARNING LEVEL
+124,West Rapti,Lamahi,Dang,0,0,0,0,0,BELOW WARNING LEVEL
+125,Koshi,Lamabagar,Dolakha,0,0,0,0,0,BELOW WARNING LEVEL
+126,,Panchase,Parbat,0,0,0,0,0,BELOW WARNING LEVEL
+127,West Rapti,Lalmatiya,Dang,0,0,0,0,0,BELOW WARNING LEVEL
+128,Lokhandeni,"Parwanipur, Sarlahi",Sarlahi,0,0,0,0,0,BELOW WARNING LEVEL
+129,Lokhandeni,Pattharkot (East),Sarlahi,0,0,0,0,0,BELOW WARNING LEVEL
+130,Koshi,Pekarnas,Solukhumbu,0,0,0,0,0,BELOW WARNING LEVEL
+131,Narayani,Kumalgaon (rainfall),Palpa,0,0,0,0,8.2,BELOW WARNING LEVEL
+132,Lalbakaiya,Kolbhi,Bara,0,0,0,0,0,BELOW WARNING LEVEL
+133,Koshi,Phidim (Panchther),Panchthar,0,0,0,0,0,BELOW WARNING LEVEL
+134,West Rapti,Koilabas,Dang,0,0,0,0,0,BELOW WARNING LEVEL
+135,Bagmati,Kirtipur,Kathmandu,0,0,0,0,0,BELOW WARNING LEVEL
+136,Bagmati,Khumaltar,Lalitpur,0,0,0,0,0,BELOW WARNING LEVEL
+137,Narayani,Khudi Bazar,Lamjung,0,0,0,0,0,BELOW WARNING LEVEL
+138,Koshi,Khotang Bazar,Khotang,0,0,0,0,0,BELOW WARNING LEVEL
+139,Koshi,Khopasi(Panauti),Kavrepalanchowk,0,0,0,0,0.4,BELOW WARNING LEVEL
+140,Narayani,Khanchikot,Arghakhachi,0,0,0,0,0.4,BELOW WARNING LEVEL
+141,Balan-Khado,Lahan,Siraha,0,0,0,0,0,BELOW WARNING LEVEL
+142,West Rapti,Khajura (Nepalganj),Banke,0,0,0,0,0,BELOW WARNING LEVEL
+143,Koshi,Machhuwaghat,Dhankuta,0,0,0,0,0,BELOW WARNING LEVEL
+144,Kankai,Mai Pokhari,Ilam,0,0,0,0,0,BELOW WARNING LEVEL
+145,Koshi,Nawalpur,Sindhupalchok,0,0,0,0,0,BELOW WARNING LEVEL
+146,Narayani,Narayani at Devghat,Chitwan,0,0,0,0,0,BELOW WARNING LEVEL
+147,Narayani,Narayani Field Office,Chitwan,0,0,0,0,0.2,BELOW WARNING LEVEL
+148,Koshi,Nala,Kavrepalanchowk,0,0,0,0,0,BELOW WARNING LEVEL
+150,Bagmati,Nagarkot_AWS,Bhaktapur,0,0,0,0,0,BELOW WARNING LEVEL
+151,Narayani,Nijgadh,Bara,0,0,0,0,0,BELOW WARNING LEVEL
+152,Karnali,Musikot,Gulmi,0,0,0,0,0,BELOW WARNING LEVEL
+153,Koshi,Murkuchi Bazar,Udayapur,0,0,0,0,0,BELOW WARNING LEVEL
+154,Narayani,Muna,Myagdi,0,0,0,0,0,BELOW WARNING LEVEL
+155,Koshi,MulGhat,Dhankuta,0,0,0,0,0,BELOW WARNING LEVEL
+156,Basin From Siwalik Zone,Mudali Parsa,Parsa,0,0,0,0,0,BELOW WARNING LEVEL
+157,Narayani,Nuwakot,Nuwakot,0,0,0,0,0,BELOW WARNING LEVEL
+158,Koshi,Melamchi-Ghyang,Sindhupalchok,0,0,0,0,0,BELOW WARNING LEVEL
+159,Lalbakaiya,Maheshpur,Rautahat,0,0,0,0,0,BELOW WARNING LEVEL
+160,Koshi,Okhaldhunga,Okhaldhunga,0,0,0,0,0,BELOW WARNING LEVEL
+162,Lokhandeni,Manusmara,Sarlahi,0,0,0,0,0,BELOW WARNING LEVEL
+163,Koshi,Manthali Airport,Ramechhap,0,0,0,0,0,BELOW WARNING LEVEL
+164,Babai,Padhampur,Dang,0,0,0,0,0,BELOW WARNING LEVEL
+165,Karnali,Manma_AWS,Kalikot,0,0,0,0,0,BELOW WARNING LEVEL
+167,Koshi,Manekharka,Sindhupalchok,0,0,0,0,0,BELOW WARNING LEVEL
+168,Koshi,Mane Bhanjyang,Okhaldhunga,0,0,0,0,0,BELOW WARNING LEVEL
+169,Koshi,Mandan,Kavrepalanchok,0,0,0,0,0,BELOW WARNING LEVEL
+170,Koshi,Pakhribas,Dhankuta,0,0,0,0,0,BELOW WARNING LEVEL
+171,Lokhandeni,Malangwa,Sarlahi,0,0,0,0,0,BELOW WARNING LEVEL
+172,Narayani,Makwanpur Gadhi,Makwanpur,0,0,0,0,0,BELOW WARNING LEVEL
+173,Narayani,Panchamul,Syangja,0,0,0,0,0,BELOW WARNING LEVEL
+174,Narayani,Markhu Gaun,Makawanpur,0,0,0,0,0,BELOW WARNING LEVEL
+175,Karnali,Garbha Durbar,Kailali,0,0,0,0,0,BELOW WARNING LEVEL
+176,Koshi,Khadbari,Sankhuwasabha,0,0,0,0,0,BELOW WARNING LEVEL
+177,Keshaliya,Kerabari,Morang,0,0,0,0,0,BELOW WARNING LEVEL
+180,Narayani,Hetauda N.F.I.,Makwanpur,0,0,0,0,0,BELOW WARNING LEVEL
+181,Lalbakaiya,Hattisude,Makwanpur,0,0,0,0,0,BELOW WARNING LEVEL
+182,Narayani,Sakhar at Tanahun,Tanahun,0,0,0,0,0,BELOW WARNING LEVEL
+183,Koshi,Salleri (Phaplu),Solukhumbu,0,0,0,0,0,BELOW WARNING LEVEL
+184,West Rapti,Hanspur,Pyuthan,0,0,0,0,0,BELOW WARNING LEVEL
+185,Mahakali,Hanman Nagar (Bhamka),Kanchanpur,0,0,1.2,1.2,1.4,BELOW WARNING LEVEL
+186,Karnali,Gwati,Dailekh,0,0.8,0.8,0.8,0.8,BELOW WARNING LEVEL
+187,Babai,Salyan Bazaar_AWS,Salyan,0,0,0,0,0.6,BELOW WARNING LEVEL
+188,Bagmati,Gumthang_AWS,Sindhupalchok,0,0,0,0,0,BELOW WARNING LEVEL
+189,Narayani,Sandhikharka,Arghakhachi,0,0,0,0,0,BELOW WARNING LEVEL
+190,Mechi,Sanischare,Jhapa,0,0,0,0,0,BELOW WARNING LEVEL
+191,Karnali,Gothikanda,Surkhet,0,0.4,0.4,0.4,0.4,BELOW WARNING LEVEL
+192,Kankai,Ilam Tea Estate,Ilam,0,0,0,0,0,BELOW WARNING LEVEL
+193,,Sankhu,Kathmandu,0,0,0,0,0,BELOW WARNING LEVEL
+194,Kamala,Golbazar,Siraha,0,0,0,0,0,BELOW WARNING LEVEL
+195,Narayani,Goga (Tilche),Manang,0,0,0,0,0,BELOW WARNING LEVEL
+196,Bagmati,Godavari,Lalitpur,0,0,0,0,0,BELOW WARNING LEVEL
+197,Bagmati,Godavari,Lalitpur,0,0,0,0,0,BELOW WARNING LEVEL
+198,West Rapti,Nepalgunj airport,Banke,0,0,0,0,0,BELOW WARNING LEVEL
+199,Koshi,Saptakoshi at Chatara (old),Sunsari,0,0,0,0,0,BELOW WARNING LEVEL
+200,Babai,Ghorai (Dang),Dang,0,0,0,0,0,BELOW WARNING LEVEL
+201,Narayani,Semari,Nawalparasi East,0,0,0,0,0,BELOW WARNING LEVEL
+202,West Rapti,Seulibang,Pyuthan,0,0,0,0,0,BELOW WARNING LEVEL
+203,Narayani,Gharedhunga,Lamjung,0,0,0,0,0,BELOW WARNING LEVEL
+204,Narayani,Shaktikhor,Chitwan,0,0,0,0,0,BELOW WARNING LEVEL
+205,Rato,Gausala,Mahottari,0,0,0,0,0,BELOW WARNING LEVEL
+206,Kankai,Gauradaha,Jhapa,0,0,0,0,0,BELOW WARNING LEVEL
+207,Mahakali,Santbajh,Baitadi,0,0,0,0,6.8,BELOW WARNING LEVEL
+208,Karnali,Pipalchaur,Rukum West,0,0,0,0,0.2,BELOW WARNING LEVEL
+209,Balan-Khado,Rupani Bazar,Saptari,0,0,0,0,0,BELOW WARNING LEVEL
+210,Narayani,Jagat (Setibas),Gorkha,0,0,0,0.2,7.4,BELOW WARNING LEVEL
+211,Mechi,Kechana,Jhapa,0,0,0,0,0,BELOW WARNING LEVEL
+212,Narayani,Pokhara_AWOS_04,Kaski,0,0,0,0,0,BELOW WARNING LEVEL
+213,Narayani,Rainastar,Lamjung,0,0,0,0,0,BELOW WARNING LEVEL
+214,,AWS at Dalli,,0,0,0,0,0,BELOW WARNING LEVEL
+216,Narayani,Rajaiya (rainfall station),Makawanpur,0,0,0,0,0,BELOW WARNING LEVEL
+217,Lalbakaiya,Rajuwa,Bara,0,0,0,0,0,BELOW WARNING LEVEL
+218,Mechi,Kanyam Tea State,Illam,0,0,0,0,0,BELOW WARNING LEVEL
+219,Kankai,"Kankai, Mainachuli",Ilam,0,0,0,0,0,BELOW WARNING LEVEL
+220,,"Rangapur, Tandi Bazar",Parsa,0,0,0,0,0,BELOW WARNING LEVEL
+221,Babai,Rani Jaruwa Nursery,Bardiya,0,0,0,0,0,BELOW WARNING LEVEL
+222,Kamala,RaniChuri,Sindhuli,0,0,0,0,0,BELOW WARNING LEVEL
+223,Rato,Kalapani,Mahottari,0,0,0,0,0,BELOW WARNING LEVEL
+224,Koshi,Rosi Khola at Panauti,Kavrepalanchok,0,0,0,0,0.4,BELOW WARNING LEVEL
+225,Narayani,Kalaiya,Bara,0,0,0,0,0,BELOW WARNING LEVEL
+229,Narayani,Jomsom Airport,Mustang,0,0,0,0,0,BELOW WARNING LEVEL
+231,Babai,Ratamata,Dang,0,0,0,0,0.2,BELOW WARNING LEVEL
+232,Koshi,Jiri_TPB,Dolakha,0,0,0,0,0,BELOW WARNING LEVEL
+233,Koshi,Jiri,Dolakha,0,0,0,0,0,BELOW WARNING LEVEL
+234,Lalbakaiya,Ratanpuri,Bara,0,0,0,0,0,BELOW WARNING LEVEL
+235,Kankai,Jeetpur,Ilam,0,0,0.2,0.2,0.2,BELOW WARNING LEVEL
+236,Rato,Janakpur Airport,Dhanusha,0,0,0,0,0,BELOW WARNING LEVEL
+237,Narayani,Jalpa,Palpa,0,0,0,0,0,BELOW WARNING LEVEL
+238,Karnali,Jajarkot_AWS,Jajarkot,0,0,0,0.2,0.2,BELOW WARNING LEVEL
+239,Narayani,Kakani,Nuwakot,0,0,0,0,0,BELOW WARNING LEVEL
+240,West Rapti,Arghakhanchi,Arghakhanchi,0,0,0,0,0,BELOW WARNING LEVEL
+94,Karnali,Talcha,Mugu,0.042,1.362,1.502,1.502,3.765,BELOW WARNING LEVEL
+51,,Dainsili (Sidhhapur),Baitadi,0.2,2.6,3,3,8,BELOW WARNING LEVEL
+230,Karnali,Ranimatta,Dailekh,0.2,1.2,2,2,2.8,BELOW WARNING LEVEL
+32,Karnali,Simikot Airport,Humla,0.31,1.94,3.867,4.5,9.473,BELOW WARNING LEVEL
+57,Karnali,Bijaypur (Raskot),Kalikot,0.4,0.8,3,3,5.8,BELOW WARNING LEVEL
+68,Mahakali,Baitadi (Gothalapani),Baitadi,0.4,1.2,1.2,1.2,2.6,BELOW WARNING LEVEL
+161,Seti/Karnali,Oli Gaun (Patkani),Achham,0.4,0.6,1,1,1.6,BELOW WARNING LEVEL
+179,Karnali,Sahu Khark,Dadeldhura,0.4,1.6,2.4,2.4,4,BELOW WARNING LEVEL
+228,Karnali,Jumla Airport,Jumla,0.577,6.265,6.473,6.473,7.25,BELOW WARNING LEVEL
+105,Karnali,Budiganga at Chitreghat,Achham,0.6,0.6,0.8,0.8,1.6,BELOW WARNING LEVEL
+215,Karnali,Karnali at Asaraghat,Achham,0.6,1.4,1.4,1.4,3.8,BELOW WARNING LEVEL
+227,Karnali,Juphal Airport,Dolpa,0.62,1.285,1.285,1.285,3.03,BELOW WARNING LEVEL
+166,Karnali,Mangalsen_AWS,Achham,0.8,1.4,2.2,2.2,3,BELOW WARNING LEVEL
+27,Karnali,West Seti at Dipayal,Doti,1,1.4,1.6,1.6,6.4,BELOW WARNING LEVEL
+43,Karnali,Dipayal (Doti),Doti,1,1.4,2,2,6.2,BELOW WARNING LEVEL
+149,Karnali,Nagma,Kalikot,1.8,6.2,7.6,7.6,10.8,BELOW WARNING LEVEL
+226,Karnali,Kabreneta,Salyan,2,3,3,3,3,BELOW WARNING LEVEL
+178,Karnali,Hurikot_Snow,Dolpa,2.21,4.26,4.26,4.26,4.41,BELOW WARNING LEVEL
+14,Karnali,DanpheLek_Snow,Jumla,2.84,7.43,7.66,7.71,10.21,BELOW WARNING LEVEL
