@@ -56,7 +56,7 @@ class User extends Authenticatable
 
     public function reliefCenter()
     {
-        return $this->hasOne(ReliefCenter::class);
+        return $this->hasOne(ReliefCenter::class, 'user_id', 'user_id');
     }
 
     public function organizations()

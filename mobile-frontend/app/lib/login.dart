@@ -40,14 +40,22 @@ class _LoginPageState extends State<LoginPage> {
     if (response.statusCode == 200) {
       // Parse token from the response body (ensure this matches what Laravel returns)
       var responseBody = json.decode(response.body);
+      var userRole = responseBody['user']['role'];
       var token = responseBody['access_token'];  // Make sure this matches your backend response
-      print(token);
-      // Save token to SharedPreferences
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('login_token', token);
 
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Login successful")));
-      Navigator.pushReplacementNamed(context, '/home');
+      if (userRole == 'General User' || userRole == 'Volunteer') {
+        // Save token to SharedPreferences
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('login_token', token);
+
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Login successful")));
+        Navigator.pushReplacementNamed(context, '/home');
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("You are not allowed to login from the app."),
+          backgroundColor: Colors.red,
+        ));
+      }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Login failed: ${response.body}")));
     }

@@ -1,7 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<style>
+    .navbar{
+        left: 0;
+    }
+    #forgot-content {
+        padding-top: 56px;
+        min-height: calc(100vh-56px);
+    }
+    footer{
+        margin-left: 0;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+    }
+</style>
+<div class="container" id="forgot-content">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

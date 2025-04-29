@@ -1,0 +1,26 @@
+<!-- Sidebar -->
+<aside id="sidebar" class="sidebar d-flex flex-column">
+    <h4 class="text-center mb-4">Relief Center</h4>
+    <div class="text-center">
+        <img src="{{ Auth::user()->avatar ?? 'https://ui-avatars.com/api/?name='.urlencode(Auth::user()->name).'&color=FFFFFF&background=263749' }}" class="user-avatar">
+    </div>
+    <p class="text-center">{{ Auth::user()->name }}</p>
+
+    <hr class="bg-light">
+
+    <a href="{{ route('home') }}"><i class="fas fa-user"></i> Home / Profile</a>
+    <a href="#"><i class="fas fa-box"></i> Supplies</a>
+    <a href="#"><i class="fas fa-hands-helping"></i> Volunteers</a>
+    <a href="#"><i class="fas fa-hand-holding-heart"></i> Requests</a>
+    <a href="#"><i class="fas fa-newspaper"></i> News Feed</a>
+
+    <a href="{{ route('logout') }}" 
+    onclick="event.preventDefault(); document.getElementById('logout-form').submit();" 
+    class="btn btn-danger mt-auto mx-3 mb-3">
+        Logout
+    </a>
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        @csrf
+    </form>
+</aside>
