@@ -62,12 +62,12 @@
 
                     <div class="col-md-2">
                         <label>Latitude</label>
-                        <input type="number" name="latitude" class="form-control" value="{{ Auth::user()->latitude }}" disabled>
+                        <input type="number" name="latitude" class="form-control" value="{{ Auth::user()->latitude }}" readonly>
                     </div>
 
                     <div class="col-md-2">
                         <label>Longitude</label>
-                        <input type="number" name="longitude" class="form-control" value="{{ Auth::user()->longitude }}" disabled>
+                        <input type="number" name="longitude" class="form-control" value="{{ Auth::user()->longitude }}" readonly>
                     </div>
                 </div>
 
@@ -160,12 +160,12 @@
 
                     <div class="col-md-6">
                         <label>Latitude</label>
-                        <input type="number" name="latitude" class="form-control" value="{{ $reliefCenter->latitude ?? '' }}" disabled>
+                        <input type="number" name="latitude" class="form-control" value="{{ $reliefCenter->latitude ?? '' }}" readonly>
                     </div>
 
                     <div class="col-md-6">
                         <label>Longitude</label>
-                        <input type="number" name="longitude" class="form-control" value="{{ $reliefCenter->longitude ?? '' }}" disabled>
+                        <input type="number" name="longitude" class="form-control" value="{{ $reliefCenter->longitude ?? '' }}" readonly>
                     </div>
                 </div>
 
@@ -177,16 +177,4 @@
 
 @endsection
 
-@push('scripts')
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-<script>
-    const toggleButton = document.getElementById('toggleSidebar');
-    const sidebar = document.getElementById('sidebar');
-    const mainContent = document.getElementById('main-content');
 
-    toggleButton.addEventListener('click', () => {
-        sidebar.classList.toggle('collapsed');
-        mainContent.classList.toggle('expanded');
-    });
-</script>
-@endpush

@@ -9,7 +9,7 @@
     <hr class="bg-light">
 
     <a href="{{ route('home') }}"><i class="fas fa-user"></i> Home / Profile</a>
-    <a href="#"><i class="fas fa-box"></i> Supplies</a>
+    <a href="{{ route('contribution.index') }}"><i class="fas fa-box"></i> Supplies</a>
     <a href="#"><i class="fas fa-hands-helping"></i> Volunteers</a>
     <a href="#"><i class="fas fa-hand-holding-heart"></i> Requests</a>
     <a href="#"><i class="fas fa-newspaper"></i> News Feed</a>
@@ -24,3 +24,16 @@
         @csrf
     </form>
 </aside>
+@push('scripts')
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<script>
+    const toggleButton = document.getElementById('toggleSidebar');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('main-content');
+
+    toggleButton.addEventListener('click', () => {
+        sidebar.classList.toggle('collapsed');
+        mainContent.classList.toggle('expanded');
+    });
+</script>
+@endpush

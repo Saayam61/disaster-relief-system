@@ -22,5 +22,10 @@ class Volunteer extends Model
     {
         return $this->belongsTo(Organization::class, 'org_id');
     }
+
+    public function contributions()
+    {
+        return $this->hasMany(Contribution::class);
+    }
 }
 

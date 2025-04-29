@@ -119,6 +119,7 @@ return new class extends Migration
             $table->foreignId('center_id')->nullable()->constrained('relief_centers', 'center_id')->onDelete('set null');
             $table->foreignId('org_id')->nullable()->constrained('organizations', 'org_id')->onDelete('set null');
             $table->foreignId('user_id')->nullable()->constrained('users', 'user_id')->onDelete('set null');
+            $table->foreignId('volunteer_id')->nullable()->constrained('volunteers', 'volunteer_id')->onDelete('set null');
             $table->string('name', 100);
             $table->integer('quantity');
             $table->string('unit', 10);
