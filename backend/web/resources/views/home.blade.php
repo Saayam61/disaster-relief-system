@@ -89,22 +89,6 @@
                 @csrf
                 <div class="row g-3 mb-3">
                     <div class="col-md-6">
-                        <label>Name</label>
-                        <input type="text" name="name" class="form-control" value="{{ $reliefCenter->name ?? '' }}">
-                        @error('name')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="col-md-6">
-                        <label>Location</label>
-                        <input type="text" name="location" class="form-control" value="{{ $reliefCenter->location ?? '' }}">
-                        @error('location')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="col-md-6">
                         <label>Address</label>
                         <input type="text" name="address" class="form-control" value="{{ $reliefCenter->address ?? '' }}">
                         @error('address')
@@ -154,21 +138,10 @@
 
                     <div class="form-check">
                         <input type="hidden" name="is_active" value="0">
-                        <input type="checkbox" id="is_active" name="is_active" class="form-check-input" value="1"{{ old('is_active', $reliefCenter->is_active) ? 'checked' : '' }}>
+                        <input type="checkbox" id="is_active" name="is_active" class="form-check-input" value="1"{{ old('is_active', optional($reliefCenter)->is_active) ? 'checked' : '' }}>
                         <label class="form-check-label" for="is_active">Is Active</label>
                     </div>
-
-                    <div class="col-md-6">
-                        <label>Latitude</label>
-                        <input type="number" name="latitude" class="form-control" value="{{ $reliefCenter->latitude ?? '' }}" readonly>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label>Longitude</label>
-                        <input type="number" name="longitude" class="form-control" value="{{ $reliefCenter->longitude ?? '' }}" readonly>
-                    </div>
                 </div>
-
                 <button type="submit" class="btn btn-success">Save Profile</button>
             </form>
         </div>

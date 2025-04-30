@@ -99,7 +99,7 @@
                                                 {{ $contribution->user->name ?? 'Unknown' }}
                                             @elseif($contribution->type === 'received')
                                                 <span class="badge bg-warning text-dark">Relief Center</span>
-                                                {{ $contribution->reliefCenter->name ?? 'Unknown' }}
+                                                {{ $contribution->reliefCenter->user->name ?? 'Unknown' }}
                                             @else
                                                 <span class="badge bg-secondary">Unknown</span>
                                             @endif
@@ -107,17 +107,17 @@
                                         <td>
                                             @if($contribution->type === 'donated')
                                                 <span class="badge bg-warning text-dark">Relief Center</span>
-                                                {{ $contribution->reliefCenter->name ?? 'Unknown' }}
+                                                {{ $contribution->reliefCenter->user->name ?? 'Unknown' }}
                                             @elseif($contribution->type === 'received')
                                                 @if($contribution->user_id)
                                                     <span class="badge bg-primary">User</span>
                                                     {{ $contribution->user->name }}
                                                 @elseif($contribution->volunteer_id)
                                                     <span class="badge bg-success">Volunteer</span>
-                                                    {{ $contribution->volunteer->name ?? 'Unknown' }}
+                                                    {{ $contribution->volunteer->user->name ?? 'Unknown' }}
                                                 @elseif($contribution->org_id)
                                                     <span class="badge bg-info text-dark">Organization</span>
-                                                    {{ $contribution->organization->org_name ?? 'Unknown' }}
+                                                    {{ $contribution->organization->user->org_name ?? 'Unknown' }}
                                                 @else
                                                     <span class="badge bg-secondary">Unknown</span>
                                                 @endif
@@ -127,24 +127,31 @@
                                         </td>
                                         <td>{{ $contribution->description ?? 'N/A' }}</td>
                                         <td>
-                                            <div class="btn-group">
-                                                @if($contribution->type === 'donated')
-                                                    <a href="{{ route('contribution.editDonation', $contribution->contribution_id) }}" class="btn btn-sm btn-warning me-2">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                @else
-                                                    <a href="{{ route('contribution.editReceive', $contribution->contribution_id) }}" class="btn btn-sm btn-warning me-2">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                @endif
-                                                <form action="{{ route('contribution.destroy', $contribution->contribution_id) }}" method="POST" class="d-inline">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </form>
-                                            </div>
+                                        @php
+                                            $reliefCenter = Auth::user()->reliefCenter ?? null;
+                                        @endphp
+                                            @if($reliefCenter->center_id === $contribution->center_id)
+                                                <div class="btn-group">
+                                                    @if($contribution->type === 'donated')
+                                                        <a href="{{ route('contribution.editDonation', $contribution->contribution_id) }}" class="btn btn-sm btn-warning me-2">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    @else
+                                                        <a href="{{ route('contribution.editReceive', $contribution->contribution_id) }}" class="btn btn-sm btn-warning me-2">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    @endif
+                                                    <form action="{{ route('contribution.destroy', $contribution->contribution_id) }}" method="POST" class="d-inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                            @else
+                                                <span class="badge bg-secondary">No Actions</span>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContributionController;
 use App\Http\Controllers\VolunteerController;
 use App\Http\Controllers\RequestController;
+use App\Http\Controllers\NewsFeedController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
@@ -84,5 +85,28 @@ Route::middleware(['auth'])->group(function () {
     // Destroy - Delete request (DELETE)
     Route::delete('/request/{req}', [RequestController::class, 'destroy'])
         ->name('request.destroy');
+});
+
+// News Feed Resource Routes
+Route::middleware(['auth'])->group(function () {
+    // Index - Show all posts (GET)
+    Route::get('/news-feed', [NewsFeedController::class, 'index'])
+        ->name('news-feed.index');
+    
+    // Insert - Add new post (POST)
+    Route::post('/news-feed/add', [NewsFeedController::class, 'store'])
+        ->name('news-feed.store');
+    
+    // Edit - Edit post (POST)
+    Route::get('/news-feed/{post}/edit', [NewsFeedController::class, 'edit'])
+        ->name('news-feed.edit');
+    
+    // Update - Update post (POST)
+    Route::post('/news-feed/{post}/update', [NewsFeedController::class, 'update'])
+        ->name('news-feed.update');
+    
+    // Destroy - Delete request (DELETE)
+    Route::delete('/news-feed/{post}', [NewsFeedController::class, 'destroy'])
+        ->name('news-feed.destroy');
 });
 

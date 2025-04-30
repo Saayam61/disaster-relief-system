@@ -27,8 +27,6 @@ class ReliefCenter extends Model
      */
     protected $fillable = [
         'user_id',
-        'name',
-        'location',
         'address',
         'capacity',
         'current_occupancy',
@@ -36,8 +34,6 @@ class ReliefCenter extends Model
         'total_supplies',
         'contact_numbers',
         'is_active',
-        'latitude',
-        'longitude',
     ];
 
     /**
@@ -47,8 +43,6 @@ class ReliefCenter extends Model
      */
     protected $casts = [
         'is_active' => 'boolean',
-        'latitude' => 'double',
-        'longitude' => 'double',
         'capacity' => 'integer',
         'current_occupancy' => 'integer',
         'total_volunteers' => 'integer',

@@ -48,8 +48,6 @@ class HomeController extends Controller
         $reliefCenter = $user->reliefCenter ?? new ReliefCenter(['user_id' => $user->user_id]);
 
         $request-> validate([
-            'name' => 'required|string|max:255',
-            'location' => 'required|string|max:255',
             'address' => 'required|string',
             'capacity' => 'required|integer|min:0',
             'current_occupancy' => 'required|integer|min:0',
@@ -57,21 +55,15 @@ class HomeController extends Controller
             'total_supplies' => 'nullable|string',
             'contact_numbers' => 'required|string|max:255',
             'is_active' => 'required',
-            // 'latitude' => 'required|numeric',
-            // 'longitude' => 'required|numeric',
         ]);
 
         $reliefCenter->fill($request->only([
-            'name',
-            'location',
             'address',
             'capacity',
             'current_occupancy',
             'total_volunteers',
             'total_supplies',
             'contact_numbers',
-            // 'latitude',
-            // 'longitude',
         ]));
         $reliefCenter->is_active = $request->input('is_active', 0);
         $reliefCenter->save();

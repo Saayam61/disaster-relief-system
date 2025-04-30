@@ -83,4 +83,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Request::class, 'user_id', 'user_id');
     }
+
+    public function canPostNews()
+    {
+        return in_array($this->role, ['Relief Center']);
+    }
 }
