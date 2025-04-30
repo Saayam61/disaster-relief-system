@@ -9,8 +9,8 @@
     <hr class="bg-light">
 
     <a href="{{ route('home') }}"><i class="fas fa-user"></i> Home / Profile</a>
-    <a href="{{ route('contribution.index') }}"><i class="fas fa-box"></i> Supplies</a>
-    <a href="#"><i class="fas fa-hands-helping"></i> Volunteers</a>
+    <a href="{{ route('contribution.index') }}"><i class="fas fa-box"></i>Contribution</a>
+    <a href="{{ route('volunteer.index') }}"><i class="fas fa-hands-helping"></i> Volunteers</a>
     <a href="#"><i class="fas fa-hand-holding-heart"></i> Requests</a>
     <a href="#"><i class="fas fa-newspaper"></i> News Feed</a>
 

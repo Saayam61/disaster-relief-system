@@ -47,7 +47,7 @@ class ContributionController extends Controller
         }
     
         // Paginate it like a pro
-        $contributions = $query->paginate(15);
+        $contributions = $query->paginate(10);
     
         // Preload models for forms or dropdowns
         $reliefCenters = ReliefCenter::all();
@@ -57,7 +57,7 @@ class ContributionController extends Controller
     
         $generalUsers = $users->where('role', 'General User');
     
-        return view('supplies', compact(
+        return view('contribution', compact(
             'contributions',
             'reliefCenters',
             'organizations',
@@ -66,18 +66,49 @@ class ContributionController extends Controller
         ));    
     }
 
+    public function newDonation()
+    {
+        $reliefCenters = ReliefCenter::all();
+        $organizations = Organization::all();
+        $users = User::all();
+        $volunteers = Volunteer::all();
+
+        $generalUsers = $users->where('role', 'General User');
+
+        return view('contributionD', compact(
+            'reliefCenters',
+            'organizations',
+            'generalUsers',
+            'volunteers'
+        ));
+    }
+
+    public function newReceive()
+    {
+        $reliefCenters = ReliefCenter::all();
+        $organizations = Organization::all();
+        $users = User::all();
+        $volunteers = Volunteer::all();
+
+        $generalUsers = $users->where('role', 'General User');
+
+        return view('contributionR', compact(
+            'reliefCenters',
+            'organizations',
+            'generalUsers',
+            'volunteers'
+        ));
+    }
+
     /**
      * Store a newly created contribution in storage.
      */
     public function store(Request $request)
     {
-        // Log::info('Store method reached', ['user_id' => Auth::id(), 'input' => $request->all()]);
-    // dd('Store method reached', $request->all());
         $validated = $request->validate([
-            // 'center_id' => 'nullable|exists:relief_centers,center_id',
-            // 'org_id' => 'nullable|exists:organizations,org_id',
+            'org_id' => 'nullable|exists:organizations,org_id',
             'user_id' => 'nullable|exists:users,user_id',
-            // 'volunteer_id' => 'nullable|exists:volunteers,volunteer_id',
+            'volunteer_id' => 'nullable|exists:volunteers,volunteer_id',
             'name' => 'required|string|max:100',
             'quantity' => 'required|integer|min:1',
             'unit' => 'required|string|max:10',
@@ -89,22 +120,18 @@ class ContributionController extends Controller
 
         $contribution = new Contribution([
             'center_id' => $reliefCenter->center_id,
-            // 'org_id' => $validated['org_id'] ?? null,
-            'user_id' => $validated['user_id'] ?? null, // fallback to current user
-            // 'volunteer_id' => $validated['volunteer_id'] ?? null,
+            'org_id' => $validated['org_id'] ?? null,
+            'user_id' => $validated['user_id'] ?? null,
+            'volunteer_id' => $validated['volunteer_id'] ?? null,
             'name' => $validated['name'],
             'quantity' => $validated['quantity'],
             'unit' => $validated['unit'],
             'type' => $validated['type'],
             'description' => $validated['description'] ?? null,
         ]);
-        // try {
-        //     $contribution->save();
-        // } catch (\Exception $e) {
-        //     dd('Save failed:', $e->getMessage());
-        // }
 
         $contribution->save();
+
         return redirect()->route('contribution.index')
             ->with('success', 'Contribution logged successfully!');
     }
@@ -112,39 +139,13 @@ class ContributionController extends Controller
     /**
      * Show the form for editing the specified contribution.
      */
-    public function edit(Request $request, Contribution $contribution)
+    public function editDonation(Request $request, Contribution $contribution)
     {
-        $query = Contribution::with(['reliefCenter', 'organization', 'user', 'volunteer'])
-            ->orderBy('created_at', 'desc');
-    
-        // Filter by contribution type if provided
-        if ($request->has('type') && in_array($request->type, ['donated', 'received'])) {
-            $query->where('type', $request->type);
-        }
-    
-        // Filter by contributor type — but smartly, based on 'type'
-        if ($request->has('user_type')) {
-            $query->where(function ($q) use ($request) {
-                switch ($request->user_type) {
-                    case 'user':
-                        $q->where('type', 'received')->whereNotNull('user_id');
-                        break;
-                    case 'volunteer':
-                        $q->where('type', 'received')->whereNotNull('volunteer_id');
-                        break;
-                    case 'organization':
-                        $q->where('type', 'received')->whereNotNull('org_id');
-                        break;
-                    case 'relief_center':
-                        $q->where('type', 'donated')->whereNotNull('center_id');
-                        break;
-                }
-            });
-        }
-    
-        // Paginate it like a pro
-        $contributions = $query->paginate(15);
 
+        $contributions = Contribution::with(['reliefCenter', 'organization', 'user', 'volunteer'])
+        ->where('type', 'donated')
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
 
         $reliefCenters = ReliefCenter::all();
         $organizations = Organization::all();
@@ -153,7 +154,32 @@ class ContributionController extends Controller
 
         $generalUsers = $users->where('role', 'General User');
 
-        return view('supplies', compact(
+        return view('ContributionD', compact(
+            'contribution',
+            'contributions',
+            'reliefCenters',
+            'organizations',
+            'generalUsers',
+            'volunteers'
+        ));
+    }
+
+    public function editReceive(Request $request, Contribution $contribution)
+    {
+
+        $contributions = Contribution::with(['reliefCenter', 'organization', 'user', 'volunteer'])
+        ->where('type', 'received')
+        ->orderBy('created_at', 'desc')
+        ->paginate(10);
+
+        $reliefCenters = ReliefCenter::all();
+        $organizations = Organization::all();
+        $users = User::all();
+        $volunteers = Volunteer::all();
+
+        $generalUsers = $users->where('role', 'General User');
+
+        return view('ContributionR', compact(
             'contribution',
             'contributions',
             'reliefCenters',
@@ -169,10 +195,9 @@ class ContributionController extends Controller
     public function update(Request $request, Contribution $contribution)
     {
         $validated = $request->validate([
-            'center_id' => 'required|exists:relief_centers,center_id',
-            // 'org_id' => 'nullable|exists:organizations,org_id',
+            'org_id' => 'nullable|exists:organizations,org_id',
             'user_id' => 'nullable|exists:users,user_id',
-            // 'volunteer_id' => 'nullable|exists:volunteers,volunteer_id',
+            'volunteer_id' => 'nullable|exists:volunteers,volunteer_id',
             'name' => 'required|string|max:100',
             'quantity' => 'required|integer|min:1',
             'unit' => 'required|string|max:10',
@@ -180,19 +205,20 @@ class ContributionController extends Controller
             'description' => 'nullable|string',
         ]);
 
+        $reliefCenter = ReliefCenter::where('user_id', Auth::id())->firstOrFail();
         $contribution->update([
-            'center_id' => $validated['center_id'],
-            // 'org_id' => $validated['org_id'] ?? null,
+            'center_id' => $reliefCenter->center_id,
+            'org_id' => $validated['org_id'] ?? null,
             'user_id' => $validated['user_id'] ?? null,
-            // 'volunteer_id' => $validated['volunteer_id'] ?? null,
+            'volunteer_id' => $validated['volunteer_id'] ?? null,
             'name' => $validated['name'],
             'quantity' => $validated['quantity'],
             'unit' => $validated['unit'],
             'type' => $validated['type'],
             'description' => $validated['description'] ?? null,
         ]);
-
-        return redirect()->route('supplies')
+        
+        return redirect()->route('contribution.index')
             ->with('success', 'Contribution updated successfully!');
     }
 
