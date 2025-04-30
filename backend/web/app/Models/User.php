@@ -76,6 +76,11 @@ class User extends Authenticatable
 
     public function communications()
     {
-        return $this->hasMany(Communication::class, 'sender_id');
+        return $this->hasMany(Communication::class, 'sender_id', 'user_id');
+    }
+
+    public function requests()
+    {
+        return $this->hasMany(Request::class, 'user_id', 'user_id');
     }
 }

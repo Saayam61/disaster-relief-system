@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\ReliefCenter;
-use App\Models\User;
 use App\Models\Volunteer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +24,7 @@ class VolunteerController extends Controller
 
     
         // Filter by approval status if provided
-        if ($request->has('approval_status') && in_array($request->approval_status, ['prnding', 'approved', 'rejected'])) {
+        if ($request->has('approval_status') && in_array($request->approval_status, ['pending', 'approved', 'rejected'])) {
             $query->where('approval_status', $request->approval_status);
         }
 
@@ -40,40 +39,22 @@ class VolunteerController extends Controller
         return view('volunteer', compact('volunteers'));    
     }
 
-    /**
-     * Store a newly created volunteer in storage.
-     */
-    public function store(Request $request)
+    public function approve(Volunteer $volunteer)
     {
-        $validated = $request->validate([
-            'org_id' => 'nullable|exists:organizations,org_id',
-            'user_id' => 'nullable|exists:users,user_id',
-            'volunteer_id' => 'nullable|exists:volunteers,volunteer_id',
-            'name' => 'required|string|max:100',
-            'quantity' => 'required|integer|min:1',
-            'unit' => 'required|string|max:10',
-            'type' => 'required|in:donated,received',
-            'description' => 'nullable|string',
-        ]);
+        if ($volunteer->approval_status === 'pending') {
+            $volunteer->approval_status = 'approved';
+            $volunteer->save();
+        }
+        return redirect()->back()->with('success', 'Volunteer approved successfully.');
+    }
 
-        $reliefCenter = ReliefCenter::where('user_id', Auth::id())->firstOrFail();
-
-        $contribution = new Volunteer([
-            'center_id' => $reliefCenter->center_id,
-            'org_id' => $validated['org_id'] ?? null,
-            'user_id' => $validated['user_id'] ?? null,
-            'volunteer_id' => $validated['volunteer_id'] ?? null,
-            'name' => $validated['name'],
-            'quantity' => $validated['quantity'],
-            'unit' => $validated['unit'],
-            'type' => $validated['type'],
-            'description' => $validated['description'] ?? null,
-        ]);
-
-        $contribution->save();
-
-        return redirect()->route('contribution.index')
-            ->with('success', 'Contribution logged successfully!');
+    public function reject(Volunteer $volunteer)
+    {
+        if ($volunteer->approval_status === 'pending') {
+            $volunteer->approval_status = 'rejected';
+            $volunteer->save();
+        }
+        return redirect()->back()->with('success', 'Volunteer rejected successfully.');
     }
 
     /**

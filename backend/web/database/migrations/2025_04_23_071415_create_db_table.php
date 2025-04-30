@@ -59,9 +59,7 @@ return new class extends Migration
         Schema::create('organizations', function (Blueprint $table) {
             $table->id('org_id');
             $table->foreignId('user_id')->constrained('users', 'user_id')->onDelete('cascade');
-            $table->string('org_name');
             $table->enum('type', ['ngo', 'ingo']);
-            $table->integer('volunteers_sent')->default(0);
             $table->boolean('is_verified')->default(false);
             $table->timestamps();
         });
@@ -84,7 +82,7 @@ return new class extends Migration
             $table->id('request_id');
             $table->foreignId('user_id')->constrained('users', 'user_id')->onDelete('cascade');
             $table->foreignId('center_id')->nullable()->constrained('relief_centers', 'center_id')->onDelete('set null');            
-            $table->enum('request_type', ['supply', 'volunteer', 'evacuation', 'medical', 'other']);
+            $table->enum('request_type', ['supply', 'evacuation', 'medical', 'other']);
             $table->enum('status', ['pending', 'processing', 'fulfilled', 'rejected'])->default('pending');
             $table->text('description');
             $table->integer('quantity')->nullable();

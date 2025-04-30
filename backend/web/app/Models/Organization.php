@@ -10,9 +10,7 @@ class Organization extends Model
 
     protected $fillable = [
         'user_id',
-        'org_name',
         'type',
-        'volunteers_sent',
         'is_verified',
     ];
 
@@ -38,5 +36,10 @@ class Organization extends Model
     public function contributions()
     {
         return $this->hasMany(Contribution::class, 'org_id');
+    }
+
+    public function communications()
+    {
+        return $this->hasMany(Communication::class, 'sender_id', 'org_id');
     }
 }

@@ -49,4 +49,9 @@ class Volunteer extends Model
     {
         return $this->hasMany(Contribution::class, 'user_id', 'user_id');
     }
+
+    public function communications()
+    {
+        return $this->hasMany(Communication::class, 'sender_id', 'volunteer_id');
+    }
 }

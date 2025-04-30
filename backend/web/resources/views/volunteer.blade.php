@@ -73,7 +73,7 @@
                                     <tr>
                                         <td>{{ $vol->created_at->format('Y-m-d H:i') }}</td>
                                         <td>{{ $vol->user->name }}</td>
-                                        <td>{{ $contribution->skills ?? 'N/A'}}</td>
+                                        <td>{{ $vol->skills ?? 'N/A'}}</td>
                                         <td>{{ $vol->availability ?? 'N/A' }}</td>
                                         <td>
                                             <span class="badge {{ $vol->stauts == 'status' ? 'bg-success' : 'bg-secondary' }}">
@@ -92,11 +92,30 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <div class="btn-group">
+                                            <div class="btn-group d-flex justify-content-start">
+                                            @if ($vol->approval_status === 'pending')
+                                                <form action="{{ route('volunteer.approve', $vol->volunteer_id) }}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-success btn-sm mx-2">
+                                                        <i class="fas fa-circle-check"></i>
+                                                    </button>
+                                                </form>
+                                                <form action="{{ route('volunteer.reject', $vol->volunteer_id) }}" method="POST" style="display:inline;">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-danger btn-sm mx-2">
+                                                        <i class="fas fa-circle-xmark"></i>
+                                                    </button>
+                                                </form>
+                                            @elseif ($vol->approval_status === 'approved')
+                                                <span class="badge bg-success"><i class="fas fa-check"></i></span>
+                                            @else ($vol->approval_status === 'rejected')
+                                                <span class="badge bg-danger"><i class="fas fa-xmark"></i></span>
+                                            @endif
+
                                                 <form action="{{ route('volunteer.destroy', $vol->volunteer_id) }}" method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">
+                                                    <button type="submit" class="btn btn-sm btn-danger mx-2" onclick="return confirm('Are you sure?')">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </form>

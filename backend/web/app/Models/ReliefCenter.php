@@ -85,4 +85,14 @@ class ReliefCenter extends Model
     {
         return $this->hasMany(Contribution::class, 'center_id', 'center_id');
     }
+
+    public function communications()
+    {
+        return $this->hasMany(Communication::class, 'sender_id', 'center_id');
+    }
+
+    public function request()
+    {
+        return $this->hasMany(Request::class, 'center_id', 'center_id');
+    }
 }

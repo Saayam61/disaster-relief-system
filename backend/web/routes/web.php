@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContributionController;
 use App\Http\Controllers\VolunteerController;
+use App\Http\Controllers\RequestController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
@@ -57,12 +58,31 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/volunteer', [VolunteerController::class, 'index'])
         ->name('volunteer.index');
     
-    // Store - Save new contribution (POST)
-    Route::post('/volunteer', [VolunteerController::class, 'store'])
-        ->name('volunteer.store');
+    // Approve - Approve new volunteers (POST)
+    Route::post('/volunteer/{volunteer}/approve', [VolunteerController::class, 'approve'])
+        ->name('volunteer.approve');
     
-    // Destroy - Delete contribution (DELETE)
+    // Reject - Reject new volunteers (POST)
+    Route::post('/volunteer/{volunteer}/reject', [VolunteerController::class, 'reject'])
+        ->name('volunteer.reject');
+    
+    // Destroy - Delete volunteers (DELETE)
     Route::delete('/volunteer/{volunteer}', [VolunteerController::class, 'destroy'])
         ->name('volunteer.destroy');
+});
+
+// Request Resource Routes
+Route::middleware(['auth'])->group(function () {
+    // Index - Show all requests (GET)
+    Route::get('/request', [RequestController::class, 'index'])
+        ->name('request.index');
+    
+    // Update - Change request status (POST)
+    Route::put('/request/{req}/update', [RequestController::class, 'update'])
+        ->name('request.update');
+    
+    // Destroy - Delete request (DELETE)
+    Route::delete('/request/{req}', [RequestController::class, 'destroy'])
+        ->name('request.destroy');
 });
 
