@@ -23,6 +23,6 @@ class NewsFeed extends Model
     // Define relationship with ReliefCenter
     public function reliefCenter()
     {
-        return $this->belongsTo(ReliefCenter::class, 'center_id', 'center_id');
+        return $this->belongsTo(ReliefCenter::class, 'center_id');
     }
 }

@@ -28,8 +28,10 @@
                 @auth
                 <li class="nav-item">
                     <div class="search-box">
+                    <form action="{{ route('search') }}" method="GET">
                         <i class="fas fa-search"></i>
-                        <input class="form-control" type="search" placeholder="Search..." aria-label="Search">
+                        <input class="form-control" name="query" type="search" placeholder="Search..." aria-label="Search">
+                    </form>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -69,7 +71,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('home') }}"><i class="fas fa-user me-2"></i> Profile</a>
+                            <a class="dropdown-item" href="{{ route('profile.index') }}"><i class="fas fa-user me-2"></i> Profile</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();

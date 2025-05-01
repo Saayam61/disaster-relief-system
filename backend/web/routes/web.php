@@ -5,6 +5,8 @@ use App\Http\Controllers\ContributionController;
 use App\Http\Controllers\VolunteerController;
 use App\Http\Controllers\RequestController;
 use App\Http\Controllers\NewsFeedController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
@@ -15,6 +17,12 @@ Auth::routes([
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// Search Resource Routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/search', [SearchController::class, 'index'])->name('search');
+    Route::post('/search', [SearchController::class, 'search'])->name('search.perform');
+});
+
 Route::middleware(['auth'])->group(function () {
     Route::post('/profile/update-profile', [HomeController::class, 'updateProfile'])->name('profile.updateProfile');
     Route::post('/profile/update-user', [HomeController::class, 'updateUser'])->name('profile.updateUser');
@@ -22,9 +30,6 @@ Route::middleware(['auth'])->group(function () {
 
 // Contributions Resource Routes
 Route::middleware(['auth'])->group(function () {
-    // Index - Show all contributions (GET)
-    Route::get('/contribution', [ContributionController::class, 'index'])
-        ->name('contribution.index');
 
     Route::get('/contribution/donation', [ContributionController::class, 'newDonation'])
         ->name('contribution.donation');    
@@ -35,6 +40,10 @@ Route::middleware(['auth'])->group(function () {
     // Store - Save new contribution (POST)
     Route::post('/contribution', [ContributionController::class, 'store'])
         ->name('contribution.store');
+    
+        // Index - Show all contributions (GET)
+        Route::get('/contribution/{userId}', [ContributionController::class, 'index'])
+        ->name('contribution.index');
     
     // Edit - Show edit donation form (GET)
     Route::get('/contribution/{contribution}/editDonation', [ContributionController::class, 'editDonation'])
@@ -92,21 +101,32 @@ Route::middleware(['auth'])->group(function () {
     // Index - Show all posts (GET)
     Route::get('/news-feed', [NewsFeedController::class, 'index'])
         ->name('news-feed.index');
+});
+
+// Profile Resource Routes
+Route::middleware(['auth'])->group(function () {
+    // Index - Show all posts (GET)
+    Route::get('/profile', [ProfileController::class, 'index'])
+        ->name('profile.index');
+
+    Route::get('/profile/{centerId}', [NewsFeedController::class, 'profile'])
+        ->name('center.profile');
+
     
     // Insert - Add new post (POST)
-    Route::post('/news-feed/add', [NewsFeedController::class, 'store'])
-        ->name('news-feed.store');
+    Route::post('/profile/add', [ProfileController::class, 'store'])
+        ->name('profile.store');
     
     // Edit - Edit post (POST)
-    Route::get('/news-feed/{post}/edit', [NewsFeedController::class, 'edit'])
-        ->name('news-feed.edit');
+    Route::get('/profile/{post}/edit', [ProfileController::class, 'edit'])
+        ->name('profile.edit');
     
     // Update - Update post (POST)
-    Route::post('/news-feed/{post}/update', [NewsFeedController::class, 'update'])
-        ->name('news-feed.update');
+    Route::post('/profile/{post}/update', [ProfileController::class, 'update'])
+        ->name('profile.update');
     
     // Destroy - Delete request (DELETE)
-    Route::delete('/news-feed/{post}', [NewsFeedController::class, 'destroy'])
-        ->name('news-feed.destroy');
+    Route::delete('/profile/{post}', [ProfileController::class, 'destroy'])
+        ->name('profile.destroy');
 });
 

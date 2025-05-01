@@ -22,22 +22,26 @@
 
 <div id="main-content" class="main-content">
     <div class="container-fluid">
-        <div class="card d-flex  my-4 p-3">
-            <h1 class="h3">New Supplies</h1>
-            <div>
-                <a href="{{ route('contribution.donation') }}" class="btn btn-success me-2">
-                    + Add New Donation
-                </a>
-                <a href="{{ route('contribution.receive') }}" class="btn btn-primary">
-                    + Add New Received
-                </a>
-            </div>
+{{-- Only show add buttons if current user is viewing their own page --}}
+@if(Auth::check() && Auth::id() === $user->user_id && Auth::user()->role === 'Relief Center')
+    <div class="card d-flex my-4 p-3">
+        <h1 class="h3">New Supplies</h1>
+        <div>
+            <a href="{{ route('contribution.donation') }}" class="btn btn-success me-2">
+                + Add New Donation
+            </a>
+            <a href="{{ route('contribution.receive') }}" class="btn btn-primary">
+                + Add New Received
+            </a>
         </div>
+    </div>
+@endif
+
         
         <!-- Supplies Log Table -->
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">
-                <h3>Supplies Log</h3>
+                <h3>Supplies Log - {{ $user->name }}</h3>
                 <div>
                     <div class="btn-group me-2">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="typeFilterDropdown" data-bs-toggle="dropdown" aria-expanded="false">

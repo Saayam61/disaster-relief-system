@@ -16,55 +16,67 @@ class ContributionController extends Controller
     /**
      * Display a listing of the contributions.
      */
-    public function index(Request $request)
-    {
-        $query = Contribution::with(['reliefCenter', 'organization', 'user', 'volunteer'])
-            ->orderBy('created_at', 'desc');
-    
-        // Filter by contribution type if provided
-        if ($request->has('type') && in_array($request->type, ['donated', 'received'])) {
-            $query->where('type', $request->type);
-        }
-    
-        // Filter by contributor type — but smartly, based on 'type'
-        if ($request->has('user_type')) {
-            $query->where(function ($q) use ($request) {
-                switch ($request->user_type) {
-                    case 'user':
-                        $q->where('type', 'received')->whereNotNull('user_id');
-                        break;
-                    case 'volunteer':
-                        $q->where('type', 'received')->whereNotNull('volunteer_id');
-                        break;
-                    case 'organization':
-                        $q->where('type', 'received')->whereNotNull('org_id');
-                        break;
-                    case 'relief_center':
-                        $q->where('type', 'donated')->whereNotNull('center_id');
-                        break;
-                }
-            });
-        }
-    
-        // Paginate it like a pro
-        $contributions = $query->paginate(10);
-    
-        // Preload models for forms or dropdowns
-        $reliefCenters = ReliefCenter::all();
-        $organizations = Organization::all();
-        $users = User::all();
-        $volunteers = Volunteer::all();
-    
-        $generalUsers = $users->where('role', 'General User');
-    
-        return view('contribution', compact(
-            'contributions',
-            'reliefCenters',
-            'organizations',
-            'generalUsers',
-            'volunteers'
-        ));    
+    public function index(Request $request, $userId)
+{
+    $query = Contribution::with(['reliefCenter', 'organization', 'user', 'volunteer'])
+        ->orderBy('created_at', 'desc');
+
+    // Filter by contribution type if provided
+    if ($request->has('type') && in_array($request->type, ['donated', 'received'])) {
+        $query->where('type', $request->type);
     }
+
+    // Filter by contributor type
+    if ($request->has('user_type')) {
+        $query->where(function ($q) use ($request) {
+            switch ($request->user_type) {
+                case 'user':
+                    $q->where('type', 'received')->whereNotNull('user_id');
+                    break;
+                case 'volunteer':
+                    $q->where('type', 'received')->whereNotNull('volunteer_id');
+                    break;
+                case 'organization':
+                    $q->where('type', 'received')->whereNotNull('org_id');
+                    break;
+                case 'relief_center':
+                    $q->where('type', 'donated')->whereNotNull('center_id');
+                    break;
+            }
+        });
+    }
+
+    $contributions = $query->where(function ($q) use ($userId) {
+        $q->where('user_id', $userId)
+          ->orWhere('volunteer_id', $userId)
+          ->orWhere('org_id', $userId)
+          ->orWhere('center_id', function ($subQuery) use ($userId) {
+              $subQuery->select('center_id')
+                  ->from('relief_centers')
+                  ->where('user_id', $userId)
+                  ->limit(1);
+          });
+    })->paginate(10);
+
+    $reliefCenters = ReliefCenter::all();
+    $organizations = Organization::all();
+    $users = User::all();
+    $volunteers = Volunteer::all();
+    $user = User::findOrFail($userId);
+    $reliefCenter = ReliefCenter::where('user_id', $user->id)->first();
+    $generalUsers = $users->where('role', 'General User');
+
+    return view('contribution', compact(
+        'contributions',
+        'reliefCenters',
+        'organizations',
+        'generalUsers',
+        'volunteers',
+        'reliefCenter',
+        'user'
+    ));
+}
+
 
     public function newDonation()
     {
@@ -72,7 +84,6 @@ class ContributionController extends Controller
         $organizations = Organization::all();
         $users = User::all();
         $volunteers = Volunteer::all();
-
         $generalUsers = $users->where('role', 'General User');
 
         return view('contributionD', compact(
@@ -130,9 +141,11 @@ class ContributionController extends Controller
             'description' => $validated['description'] ?? null,
         ]);
 
+        $userId = Auth::id();
+
         $contribution->save();
 
-        return redirect()->route('contribution.index')
+        return redirect()->route('contribution.index', ['userId' => $userId])
             ->with('success', 'Contribution logged successfully!');
     }
 
@@ -160,7 +173,7 @@ class ContributionController extends Controller
             'reliefCenters',
             'organizations',
             'generalUsers',
-            'volunteers'
+            'volunteers',
         ));
     }
 
@@ -185,7 +198,7 @@ class ContributionController extends Controller
             'reliefCenters',
             'organizations',
             'generalUsers',
-            'volunteers'
+            'volunteers',
         ));
     }
 
@@ -217,8 +230,10 @@ class ContributionController extends Controller
             'type' => $validated['type'],
             'description' => $validated['description'] ?? null,
         ]);
+        $userId = Auth::id();
+
         
-        return redirect()->route('contribution.index')
+        return redirect()->route('contribution.index', ['userId' => $userId])
             ->with('success', 'Contribution updated successfully!');
     }
 
@@ -229,7 +244,7 @@ class ContributionController extends Controller
     {
         $contribution->delete();
 
-        return redirect()->route('contribution.index')
+        return redirect()->route('contribution.index', ['userId' => Auth::id()])
             ->with('success', 'Contribution deleted successfully!');
     }
 }

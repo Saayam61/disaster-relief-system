@@ -71,7 +71,7 @@ class User extends Authenticatable
 
     public function contributions()
     {
-        return $this->hasMany(Contribution::class);
+        return $this->hasMany(Contribution::class, 'user_id', 'user_id');
     }
 
     public function communications()

@@ -41,8 +41,6 @@ return new class extends Migration
         Schema::create('relief_centers', function (Blueprint $table) {
             $table->id('center_id');
             $table->foreignId('user_id')->constrained('users', 'user_id')->onDelete('cascade');
-            $table->string('name');
-            $table->string('location');
             $table->text('address');
             $table->integer('capacity');
             $table->integer('current_occupancy')->default(0);
@@ -50,8 +48,6 @@ return new class extends Migration
             $table->text('total_supplies')->nullable();
             $table->string('contact_numbers');
             $table->boolean('is_active')->default(true);
-            $table->double('latitude');
-            $table->double('longitude');
             $table->timestamps();
         });
 
@@ -135,9 +131,6 @@ return new class extends Migration
             $table->index('location');
         });
 
-        Schema::table('relief_centers', function (Blueprint $table) {
-            $table->index('location');
-        });
 
         Schema::table('communications', function (Blueprint $table) {
             $table->index('timestamp');
