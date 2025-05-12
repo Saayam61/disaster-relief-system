@@ -27,7 +27,6 @@ class ReliefCenter extends Model
      */
     protected $fillable = [
         'user_id',
-        'address',
         'capacity',
         'current_occupancy',
         'total_volunteers',

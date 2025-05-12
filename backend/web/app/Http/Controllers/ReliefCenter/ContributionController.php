@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ReliefCenter;
 
 use App\Models\Contribution;
 use App\Models\ReliefCenter;
@@ -10,6 +10,7 @@ use App\Models\Volunteer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 
 class ContributionController extends Controller
 {
@@ -66,7 +67,7 @@ class ContributionController extends Controller
     $reliefCenter = ReliefCenter::where('user_id', $user->id)->first();
     $generalUsers = $users->where('role', 'General User');
 
-    return view('contribution', compact(
+    return view('relief_center.contribution', compact(
         'contributions',
         'reliefCenters',
         'organizations',
@@ -86,7 +87,7 @@ class ContributionController extends Controller
         $volunteers = Volunteer::all();
         $generalUsers = $users->where('role', 'General User');
 
-        return view('contributionD', compact(
+        return view('relief_center.contributionD', compact(
             'reliefCenters',
             'organizations',
             'generalUsers',
@@ -103,7 +104,7 @@ class ContributionController extends Controller
 
         $generalUsers = $users->where('role', 'General User');
 
-        return view('contributionR', compact(
+        return view('relief_center.contributionR', compact(
             'reliefCenters',
             'organizations',
             'generalUsers',
@@ -167,7 +168,7 @@ class ContributionController extends Controller
 
         $generalUsers = $users->where('role', 'General User');
 
-        return view('ContributionD', compact(
+        return view('relief_center.ContributionD', compact(
             'contribution',
             'contributions',
             'reliefCenters',
@@ -192,7 +193,7 @@ class ContributionController extends Controller
 
         $generalUsers = $users->where('role', 'General User');
 
-        return view('ContributionR', compact(
+        return view('relief_center.ContributionR', compact(
             'contribution',
             'contributions',
             'reliefCenters',

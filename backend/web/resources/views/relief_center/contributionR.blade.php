@@ -55,8 +55,8 @@
                             <option value="">Select Volunteer</option>
                             @foreach($volunteers as $volunteer)
                                 <option value="{{ $volunteer->volunteer_id }}"
-                                    {{ old('user_id', $contribution->volunteer_id ?? '') == $volunteer->volunteer_id ? 'selected' : '' }}>
-                                    {{ $volunteer->name }}
+                                    {{ old('volunteer_id', $contribution->volunteer_id ?? '') == $volunteer->volunteer_id ? 'selected' : '' }}>
+                                    {{ $volunteer->user->name }}
                                 </option>
                             @endforeach
                         </select>
@@ -68,8 +68,8 @@
                             <option value="">Select Organization</option>
                             @foreach($organizations as $org)
                                 <option value="{{ $org->org_id }}"
-                                {{ old('user_id', $contribution->org_id ?? '') == $org->org_id ? 'selected' : '' }}>
-                                {{ $org->name }}
+                                {{ old('org_id', $contribution->org_id ?? '') == $org->org_id ? 'selected' : '' }}>
+                                {{ $org->user->name }}
                                 </option>
                             @endforeach
                         </select>

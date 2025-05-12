@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class SearchController extends Controller
 {
@@ -13,6 +14,24 @@ class SearchController extends Controller
         // Base query
         $query = User::whereIn('role', ['Relief Center', 'Organization', 'Volunteer'])
                     ->whereNot('user_id', Auth::id()); // also changed 'user_id' to 'id' assuming it's the primary key
+
+        // Location filter
+        $user = Auth::user();
+        if ($request->filled('radius')) {
+            $latitude = $user->latitude;
+            $longitude = $user->longitude;
+            $radius = $request->input('radius');
+        
+            $query->whereRaw("
+                (6371 * acos(
+                cos(radians(?)) 
+                * cos(radians(latitude)) 
+                * cos(radians(longitude) - radians(?))
+                + sin(radians(?)) 
+                * sin(radians(latitude))
+                )) < ?
+            ", [$latitude, $longitude, $latitude, $radius]);
+        }
 
         // Text search if query is provided
         if ($request->filled('query')) {
@@ -26,6 +45,11 @@ class SearchController extends Controller
                     }
                 }
             });
+        }
+
+        // Role filter
+        if ($request->has('role') && in_array($request->role, ['Relief Center', 'Organization', 'Volunteer'])) {
+            $query->where('role', $request->role);
         }
 
         // Now paginate no matter what
@@ -69,28 +93,15 @@ class SearchController extends Controller
         }
 
         // Role filter
-        if ($request->filled('role')) {
-            $query->where('role', $request->input('role'));
+        // if ($request->filled('role')) {
+        //     $query->where('role', $request->input('role'));
+        // }
+
+        if ($request->has('role') && in_array($request->role, ['Relief Center', 'Organization', 'Volunteer'])) {
+            $query->where('role', $request->role);
         }
 
-        // Location filter
-        if ($request->filled('latitude') && $request->filled('longitude') && $request->filled('radius')) {
-            $latitude = $request->input('latitude');
-            $longitude = $request->input('longitude');
-            $radius = $request->input('radius');
-
-            $query->whereHas('profile', function($q) use ($latitude, $longitude, $radius) {
-                $q->whereRaw("
-                    (6371 * acos(
-                        cos(radians(?)) 
-                        * cos(radians(latitude)) 
-                        * cos(radians(longitude) - radians(?))
-                    ) + sin(radians(?)) 
-                    * sin(radians(latitude)))
-                    < ?
-                ", [$latitude, $longitude, $latitude, $radius]);
-            });
-        }
+        
 
         // Order results
         if ($request->filled('query')) {

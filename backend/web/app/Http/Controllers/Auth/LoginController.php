@@ -47,8 +47,8 @@ class LoginController extends Controller
                 'email' => 'Access Denied. Use the app, not the web.',
             ]);
         }
-        if ($user->role === 'admin') {
-            return redirect('/admin/dashboard');
+        if ($user->role === 'Administrator') {
+            return redirect('/home/admin');
         }
         return redirect($this->redirectTo);
     }

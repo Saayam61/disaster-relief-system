@@ -37,60 +37,52 @@
                     <div class="card-body">
                         <form method="GET" action="{{ route('search') }}" class="mb-4">
                             <div class="row">
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label for="query">Search by Name</label>
-                                        <div class="input-group">
-                                            <input type="text" id="query" name="query" class="form-control" 
-                                                placeholder="Type any part of a name..." 
-                                                value="{{ request('query') }}">
-                                            <div class="input-group-append">
-                                                <button class="btn btn-primary" type="submit">
-                                                    <i class="fas fa-search"></i> Search
-                                                </button>
-                                            </div>
-                                        </div>
-                                        <small class="form-text text-muted">
-                                            Leave blank to see all users
-                                        </small>
+                                <div class="col-md-6 mb-2">
+                                    <div class="input-group">
+                                        <input type="text" id="query" name="query" class="form-control"
+                                            placeholder="Search Name"
+                                            value="{{ request('query') }}">
+                                        <button class="btn btn-primary" type="submit">
+                                            <i class="fas fa-search"></i> Search
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-3 mb-2">
+                                    <div class="btn-group w-100">
+                                        <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="typeFilterDropdown"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                            Filter by Role
+                                        </button>
+                                        <ul class="dropdown-menu w-100" aria-labelledby="typeFilterDropdown">
+                                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['role' => '']) }}">All Types</a></li>
+                                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['role' => 'Relief Center']) }}">Relief Center</a></li>
+                                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['role' => 'Organization']) }}">Organization</a></li>
+                                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['role' => 'Volunteer']) }}">Volunteer</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 mb-2">
+                                    <div class="btn-group w-100">
+                                        <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="radiusFilterDropdown"
+                                                data-bs-toggle="dropdown" aria-expanded="false">
+                                            Filter by Radius
+                                        </button>
+                                        <ul class="dropdown-menu w-100" aria-labelledby="radiusFilterDropdown">
+                                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['radius' => 500]) }}">All Within Nepal</a></li>
+                                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['radius' => 10]) }}">10 km</a></li>
+                                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['radius' => 25]) }}">25 km</a></li>
+                                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['radius' => 50]) }}">50 km</a></li>
+                                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['radius' => 100]) }}">100 km</a></li>
+                                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['radius' => 250]) }}">250 km</a></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="row mt-3">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="role">Filter by Role</label>
-                                        <select id="role" name="role" class="form-control">
-                                            <option value="">All Roles</option>
-                                            <option value="relief_center" {{ request('role') == 'relief_center' ? 'selected' : '' }}>Relief Center</option>
-                                            <option value="organization" {{ request('role') == 'organization' ? 'selected' : '' }}>Organization</option>
-                                            <option value="volunteer" {{ request('role') == 'volunteer' ? 'selected' : '' }}>Volunteer</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                
-                                <div class="col-md-8">
-                                    <div class="form-group">
-                                        <label>Location Filter (optional)</label>
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <input type="number" step="any" name="latitude" class="form-control" 
-                                                    placeholder="Latitude" value="{{ request('latitude') }}">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="number" step="any" name="longitude" class="form-control" 
-                                                    placeholder="Longitude" value="{{ request('longitude') }}">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <input type="number" name="radius" class="form-control" 
-                                                    min="1" max="100" placeholder="Radius (km)" 
-                                                    value="{{ request('radius', 10) }}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <hr class="bg-light">
+
                         </form>
 
                         @if($results->count() > 0)
@@ -107,32 +99,26 @@
                                         <div class="list-group-item">
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div>
-                                                    <h5>
+                                                    <h5 class="d-flex align-items-center">
                                                         <a href="{{ route('contribution.index', [$user->user_id]) }}">
-                                                            @if(request()->filled('query'))
-                                                                @foreach(explode(' ', request('query')) as $term)
-                                                                    @if(str_contains(strtolower($user->name), strtolower($term)))
-                                                                        <mark>{{ $term }}</mark>
-                                                                    @endif
-                                                                @endforeach
-                                                            @endif
-                                                            {{ $user->name }}
+                                                            <div class="d-flex align-items-center">
+                                                                <img src="{{ Auth::user()->avatar ?? 'https://ui-avatars.com/api/?name='.urlencode($user->name).'&color=FFFFFF&background=263749' }}" class="user-avatar">
+                                                            <span class="badge bg-success">{{ $user->name }}</span>
+                                                            </div>
                                                         </a>
+                                                        <span class="ms-5"><i class="fa-solid fa-location-dot"></i></i>
+                                                                {{ $user->address }}
+                                                        </span>
                                                     </h5>
                                                     <p class="mb-1">
-                                                        <span class="badge badge-primary">
+                                                        <span class="badge bg-primary">
                                                             {{ ucfirst(str_replace('_', ' ', $user->role)) }}
                                                         </span>
                                                     </p>
-                                                    @if($user->profile && $user->profile->location)
-                                                        <small class="text-muted">
-                                                            <i class="fas fa-map-marker-alt"></i> {{ $user->profile->location }}
-                                                        </small>
-                                                    @endif
                                                 </div>
                                                 <div>
                                                     <a href=" route('messages.create', ['recipient_id' => $user->id]) }}" 
-                                                    class="btn btn-sm btn-outline-primary">
+                                                        class="badge bg-dark text-decoration-none fs-6">
                                                         <i class="fas fa-envelope"></i> Message
                                                     </a>
                                                 </div>

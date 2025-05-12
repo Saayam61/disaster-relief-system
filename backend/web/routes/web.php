@@ -1,21 +1,39 @@
 <?php
 
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ContributionController;
-use App\Http\Controllers\VolunteerController;
-use App\Http\Controllers\RequestController;
+use App\Http\Controllers\ReliefCenter\HomeController;
+use App\Http\Controllers\ReliefCenter\ContributionController;
+use App\Http\Controllers\ReliefCenter\VolunteerController;
+use App\Http\Controllers\ReliefCenter\RequestController;
+use App\Http\Controllers\ReliefCenter\ProfileController;
+use App\Http\Controllers\LocationController;
 use App\Http\Controllers\NewsFeedController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\ReliefCenterController as AdminReliefCenterController;
+use App\Http\Controllers\Admin\VolunteerController as AdminVolunteerController;
+use App\Http\Controllers\Admin\ContributionController as AdminContributionController;
+use App\Http\Controllers\Admin\PostController as AdminPostController;
+use App\Http\Controllers\Admin\RequestController as AdminRequestController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index']);
 
 Auth::routes([
     'register' => false, // Disable public registration
 ]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('/update-location', [LocationController::class, 'updateLocation'])->middleware('auth');
+
+
+// Relief Center Routes
+
+
+
+Route::middleware(['auth', 'role:Relief Center'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+});
 
 // Search Resource Routes
 Route::middleware(['auth'])->group(function () {
@@ -130,3 +148,44 @@ Route::middleware(['auth'])->group(function () {
         ->name('profile.destroy');
 });
 
+
+
+// Admin Routes
+
+
+
+Route::middleware(['auth', 'role:Administrator'])->group(function () {
+    Route::get('/home/admin', [AdminHomeController::class, 'index'])->name('admin.home');
+});
+
+Route::middleware(['auth', 'role:Administrator'])->group(function () {
+    Route::get('/users/admin', [AdminUserController::class, 'index'])->name('admin.users');
+    Route::delete('/admin/users/{user}', [AdminUserController::class, 'destroy'])->name('admin.users.destroy');
+});
+
+Route::middleware(['auth', 'role:Administrator'])->group(function () {
+    Route::get('/rc/admin', [AdminReliefCenterController::class, 'index'])->name('admin.reliefcenters');
+    Route::delete('/admin/rc/{rc}', [AdminReliefCenterController::class, 'destroy'])->name('admin.reliefcenters.destroy');
+});
+
+Route::middleware(['auth', 'role:Administrator'])->group(function () {
+    Route::get('/vol/admin', [AdminVolunteerController::class, 'index'])->name('admin.volunteers');
+    Route::put('/admin/vol/{vol}/updateRC', [AdminVolunteerController::class, 'updateRC'])->name('admin.volunteers.updateRC');
+    Route::put('/admin/vol/{vol}/updateOrg', [AdminVolunteerController::class, 'updateOrg'])->name('admin.volunteers.updateOrg');
+    Route::delete('/admin/vol/{vol}/delete', [AdminVolunteerController::class, 'destroy'])->name('admin.volunteers.destroy');
+});
+
+Route::middleware(['auth', 'role:Administrator'])->group(function () {
+    Route::get('/contributions/admin', [AdminContributionController::class, 'index'])->name('admin.contributions');
+    Route::delete('/admin/contributions/{contribution}', [AdminContributionController::class, 'destroy'])->name('admin.contributions.destroy');
+});
+
+Route::middleware(['auth', 'role:Administrator'])->group(function () {
+    Route::get('/posts/admin', [AdminPostController::class, 'index'])->name('admin.posts');
+    Route::delete('/admin/posts/{post}', [AdminPostController::class, 'destroy'])->name('admin.posts.destroy');
+});
+
+Route::middleware(['auth', 'role:Administrator'])->group(function () {
+    Route::get('/requests/admin', [AdminRequestController::class, 'index'])->name('admin.requests');
+    Route::delete('/admin/requests/{req}', [AdminRequestController::class, 'destroy'])->name('admin.requests.destroy');
+});

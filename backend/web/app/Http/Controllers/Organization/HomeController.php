@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Organization;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\ReliefCenter;
+use App\Models\Organization;
 use App\Models\User;
+use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
@@ -17,7 +18,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('home');
+        return view('organization.home');
     }
 
     public function updateUser(Request $request)
@@ -28,12 +29,14 @@ class HomeController extends Controller
             'name' => 'required|string|max:255',
             'phone' => 'required|numeric|digits:10|unique:users,phone,' . $user->user_id . ',user_id',
             'email' => 'required|email|string|max:255|unique:users,email,' . $user->user_id . ',user_id',
+            'address' => 'required|string|max:255',
         ]);
 
         $data = [
             'name' => $request->name,
             'phone' => $request->phone,
             'email' => $request->email,
+            'address' => $request->address,
         ];
 
         // $user->save();
@@ -45,19 +48,14 @@ class HomeController extends Controller
     public function updateProfile(Request $request)
     {
         $user = Auth::user();
-        $reliefCenter = $user->reliefCenter ?? new ReliefCenter(['user_id' => $user->user_id]);
+        $organizations = $user->organizations ?? new Organization(['user_id' => $user->user_id]);
 
         $request-> validate([
-            'address' => 'required|string',
-            'capacity' => 'required|integer|min:0',
-            'current_occupancy' => 'required|integer|min:0',
-            'total_volunteers' => 'required|integer|min:0',
-            'total_supplies' => 'nullable|string',
-            'contact_numbers' => 'required|string|max:255',
-            'is_active' => 'required',
+            'type' => 'required|in:i/ngo, private',
+            'is_verified' => 'required|integer|min:',
         ]);
 
-        $reliefCenter->fill($request->only([
+        $organizations->fill($request->only([
             'address',
             'capacity',
             'current_occupancy',
@@ -65,9 +63,9 @@ class HomeController extends Controller
             'total_supplies',
             'contact_numbers',
         ]));
-        $reliefCenter->is_active = $request->input('is_active', 0);
-        $reliefCenter->save();
+        $organizations->is_active = $request->input('is_active', 0);
+        $organizations->save();
 
-        return redirect()->back()->with('success', 'Relief center profile updated successfully!');
+        return redirect()->back()->with('success', 'Organization profile updated successfully!');
     }
 }

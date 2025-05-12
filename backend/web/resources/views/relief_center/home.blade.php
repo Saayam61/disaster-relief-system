@@ -44,7 +44,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label>Phone</label>
                         <input type="text" name="phone" class="form-control" value="{{ Auth::user()->phone }}">
                         @error('phone')
@@ -52,10 +52,18 @@
                         @enderror
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-2">
                         <label>Email</label>
                         <input type="email" name="email" class="form-control" value="{{ Auth::user()->email }}">
                         @error('email')
+                            <span class="text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="col-md-2">
+                        <label>Address</label>
+                        <input type="text" name="address" class="form-control" value="{{ Auth::user()->address }}">
+                        @error('address')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
@@ -88,15 +96,8 @@
             <form method="POST" action="{{ route('profile.updateProfile') }}">
                 @csrf
                 <div class="row g-3 mb-3">
-                    <div class="col-md-6">
-                        <label>Address</label>
-                        <input type="text" name="address" class="form-control" value="{{ $reliefCenter->address ?? '' }}">
-                        @error('address')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label>Capacity</label>
                         <input type="number" name="capacity" class="form-control" value="{{ $reliefCenter->capacity ?? '' }}">
                         @error('capacity')
@@ -104,7 +105,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label>Current Occupancy</label>
                         <input type="number" name="current_occupancy" class="form-control" value="{{ $reliefCenter->current_occupancy ?? '' }}">
                         @error('current_occupancy')
@@ -112,7 +113,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label>Total Volunteers</label>
                         <input type="number" name="total_volunteers" class="form-control" value="{{ $reliefCenter->total_volunteers ?? '' }}">
                         @error('total_volunteers')

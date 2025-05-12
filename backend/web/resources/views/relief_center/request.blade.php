@@ -76,6 +76,7 @@
                                 <tr>
                                     <th>Date</th>
                                     <th>Name</th>
+                                    <th>Address</th>
                                     <th>Quantity</th>
                                     <th>Unit</th>
                                     <th>Urgency</th>
@@ -90,6 +91,7 @@
                                     <tr>
                                         <td>{{ $req->created_at->format('Y-m-d H:i') }}</td>
                                         <td>{{ $req->user->name }}</td>
+                                        <td>{{ $req->user->address }}</td>
                                         <td>{{ $req->quantity ?? 'N/A'}}</td>
                                         <td>{{ $req->unit ?? 'N/A' }}</td>
                                         <td>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ReliefCenter;
 
 use App\Models\ReliefCenter;
 use App\Models\Request as ModelsRequest;
@@ -8,6 +8,7 @@ use App\Models\Volunteer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 
 class RequestController extends Controller
 {
@@ -42,7 +43,7 @@ class RequestController extends Controller
         // Paginate it like a pro
         $requests = $query->paginate(10);
         
-        return view('request', compact('requests'));    
+        return view('relief_center.request', compact('requests'));    
     }
 
     public function update(Request $request, ModelsRequest $req)

@@ -1,6 +1,6 @@
 <footer class="text-center py-4">
     <div class="container">
-        @if(Auth::check())
+        @if(Auth::check() && Auth::user()->role !== 'Administrator')
         <div class="row">
             <div class="col-md-4 mb-3">
                 <h5>Disaster Relief System</h5>
@@ -10,7 +10,7 @@
             <div class="col-md-4 mb-3">
                 <h5>Quick Links</h5>
                 <ul class="list-unstyled quick-links">
-                    <li><a href="home"><i class="fas fa-home me-2"></i> Home</a></li>
+                    <li><a href="#"><i class="fas fa-home me-2"></i> Home</a></li>
                     <li><a href="#"><i class="fas fa-info-circle me-2"></i> About Us</a></li>
                     <li><a href="#"><i class="fas fa-envelope me-2"></i> Contact</a></li>
                     <li><a href="#"><i class="fas fa-hand-holding-heart me-2"></i> Donate</a></li>

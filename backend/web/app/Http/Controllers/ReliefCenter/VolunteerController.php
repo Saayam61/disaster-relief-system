@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ReliefCenter;
 
 use App\Models\ReliefCenter;
 use App\Models\Volunteer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
 
 class VolunteerController extends Controller
 {
@@ -20,9 +21,27 @@ class VolunteerController extends Controller
         // Build the query only for this relief center
         $query = Volunteer::with(['reliefCenter', 'user'])
         ->where('center_id', $reliefCenter->center_id)
-        ->orderBy('created_at', 'desc');
+        ->orderBy('created_at', 'desc')
+        ->join('users', 'volunteers.user_id', '=', 'users.user_id')
+        ->select('volunteers.*');
 
-    
+        $user = Auth::user();
+        if ($request->filled('radius')) {
+            $latitude = $user->latitude;
+            $longitude = $user->longitude;
+            $radius = $request->input('radius');
+        
+            $query->whereRaw("
+                (6371 * acos(
+                cos(radians(?)) 
+                * cos(radians(users.latitude)) 
+                * cos(radians(users.longitude) - radians(?))
+                + sin(radians(?)) 
+                * sin(radians(latitude))
+                )) < ?
+            ", [$latitude, $longitude, $latitude, $radius]);
+        }
+
         // Filter by approval status if provided
         if ($request->has('approval_status') && in_array($request->approval_status, ['pending', 'approved', 'rejected'])) {
             $query->where('approval_status', $request->approval_status);
@@ -36,7 +55,7 @@ class VolunteerController extends Controller
         // Paginate it like a pro
         $volunteers = $query->paginate(10);
         
-        return view('volunteer', compact('volunteers'));    
+        return view('relief_center.volunteer', compact('volunteers'));    
     }
 
     public function approve(Volunteer $volunteer)

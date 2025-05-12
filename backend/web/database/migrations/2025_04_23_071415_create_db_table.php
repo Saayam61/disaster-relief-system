@@ -77,7 +77,7 @@ return new class extends Migration
         Schema::create('requests', function (Blueprint $table) {
             $table->id('request_id');
             $table->foreignId('user_id')->constrained('users', 'user_id')->onDelete('cascade');
-            $table->foreignId('center_id')->nullable()->constrained('relief_centers', 'center_id')->onDelete('set null');            
+            $table->foreignId('center_id')->constrained('relief_centers', 'center_id')->onDelete('cascade');            
             $table->enum('request_type', ['supply', 'evacuation', 'medical', 'other']);
             $table->enum('status', ['pending', 'processing', 'fulfilled', 'rejected'])->default('pending');
             $table->text('description');

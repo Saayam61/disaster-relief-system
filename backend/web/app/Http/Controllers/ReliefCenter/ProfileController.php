@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\ReliefCenter;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\NewsFeed;
 use App\Models\ReliefCenter;
+use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
@@ -33,7 +34,7 @@ class ProfileController extends Controller
                 ->orderBy('created_at', 'desc')
                 ->get();
 
-    return view('profile', compact('posts', 'reliefCenter'));
+    return view('relief_center.profile', compact('posts', 'reliefCenter'));
 }
 
     
@@ -71,7 +72,7 @@ class ProfileController extends Controller
 
         $posts = NewsFeed::latest()->with('reliefCenter')->get();
 
-        return view('profile', compact('post', 'posts'));
+        return view('relief_center.profile', compact('post', 'posts'));
     }
 
     public function update(Request $request, NewsFeed $post)

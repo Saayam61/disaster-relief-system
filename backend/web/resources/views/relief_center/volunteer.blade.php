@@ -49,6 +49,21 @@
                             <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['approval_status' => 'rejected']) }}">Rejected</a></li>
                         </ul>
                     </div>
+
+                    <div class="btn-group me-2">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="radiusFilterDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            Filter by Radius
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="radiusFilterDropdown">
+                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['radius' => 500]) }}">All Within Nepal</a></li>
+                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['radius' => 10]) }}">10 km</a></li>
+                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['radius' => 25]) }}">25 km</a></li>
+                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['radius' => 50]) }}">50 km</a></li>
+                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['radius' => 100]) }}">100 km</a></li>
+                            <li><a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['radius' => 250]) }}">250 km</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="card-body">
@@ -61,6 +76,7 @@
                                 <tr>
                                     <th>Date</th>
                                     <th>Name</th>
+                                    <th>Address</th>
                                     <th>Skills</th>
                                     <th>Availability</th>
                                     <th>Status</th>
@@ -73,6 +89,7 @@
                                     <tr>
                                         <td>{{ $vol->created_at->format('Y-m-d H:i') }}</td>
                                         <td>{{ $vol->user->name }}</td>
+                                        <td>{{ $vol->user->address }}</td>
                                         <td>{{ $vol->skills ?? 'N/A'}}</td>
                                         <td>{{ $vol->availability ?? 'N/A' }}</td>
                                         <td>

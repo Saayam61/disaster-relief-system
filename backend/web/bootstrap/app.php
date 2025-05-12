@@ -15,6 +15,12 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->append(\App\Http\Middleware\CorsMiddleware::class);
+
+        // custom middleware for role-based access control
+        $middleware->alias([
+            'role' => \App\Http\Middleware\RoleMiddleware::class,
+        ]);
+
         EnsureFrontendRequestsAreStateful::class;
     })
     ->withExceptions(function (Exceptions $exceptions) {

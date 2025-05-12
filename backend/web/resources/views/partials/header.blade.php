@@ -4,7 +4,7 @@
             <i class="fas fa-align-justify"></i>
         </button>
         
-        <a class="navbar-brand" href="{{ url('/') }}">
+        <a class="navbar-brand" href="#">
             <img src="/logo.png" alt="Logo" class="logo me-2">
             <strong class="title">Disaster Relief System</strong>
         </a>
@@ -18,7 +18,11 @@
             <ul class="navbar-nav me-auto">
                 @auth
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('home') }}"><i class="fas fa-home me-1"></i> Home</a>
+                    @if(Auth::user()->role === 'Administrator')
+                        <a class="nav-link" href="{{ route('admin.home') }}"><i class="fas fa-home me-1"></i> Home</a>
+                    @else
+                        <a class="nav-link" href="{{ route('home') }}"><i class="fas fa-home me-1"></i> Home</a>
+                    @endif                
                 </li>
                 @endauth
             </ul>
@@ -26,26 +30,28 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">
                 @auth
-                <li class="nav-item">
-                    <div class="search-box">
-                    <form action="{{ route('search') }}" method="GET">
-                        <i class="fas fa-search"></i>
-                        <input class="form-control" name="query" type="search" placeholder="Search..." aria-label="Search">
-                    </form>
-                    </div>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link action-icon" href="#">
-                        <i class="fas fa-bell"></i>
-                        <span class="notification-badge">3</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link action-icon" href="#">
-                        <i class="fas fa-envelope"></i>
-                        <span class="notification-badge">1</span>
-                    </a>
-                </li>
+                    @if(Auth::user()->role !== 'Administrator')
+                        <li class="nav-item">
+                            <div class="search-box">
+                            <form action="{{ route('search') }}" method="GET">
+                                <i class="fas fa-search"></i>
+                                <input class="form-control" name="query" type="search" placeholder="Search..." aria-label="Search">
+                            </form>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link action-icon" href="#">
+                                <i class="fas fa-bell"></i>
+                                <span class="notification-badge">3</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link action-icon" href="#">
+                                <i class="fas fa-envelope"></i>
+                                <span class="notification-badge">1</span>
+                            </a>
+                        </li>
+                    @endif
                 @endauth
                 
                 <!-- Authentication Links -->
@@ -71,14 +77,11 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('profile.index') }}"><i class="fas fa-user me-2"></i> Profile</a>
-                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
                                <i class="fas fa-sign-out-alt me-2"></i> {{ __('Logout') }}
                             </a>
-
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>

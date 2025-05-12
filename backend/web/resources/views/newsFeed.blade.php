@@ -38,6 +38,9 @@
                             style="width: 40px; height: 40px; object-fit: cover;">
                         <span class="fw-semibold">{{ $post->reliefCenter->user->name ?? 'Unknown' }}</span>
                     </div>
+                    <span class="ms-5"><i class="fa-solid fa-location-dot"></i></i>
+                        {{ $post->reliefCenter->user->address }}
+                    </span>
                     <text class="text-muted">{{ $post->created_at->diffForHumans() }}</text>
                 </div>
 
