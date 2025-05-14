@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\ReliefCenterController as AdminReliefCenterController;
 use App\Http\Controllers\Admin\VolunteerController as AdminVolunteerController;
+use App\Http\Controllers\Admin\OrganizationController as AdminOrganizationController;
 use App\Http\Controllers\Admin\ContributionController as AdminContributionController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\RequestController as AdminRequestController;
@@ -191,6 +192,12 @@ Route::middleware(['auth', 'role:Administrator'])->group(function () {
     Route::put('/admin/vol/{vol}/updateRC', [AdminVolunteerController::class, 'updateRC'])->name('admin.volunteers.updateRC');
     Route::put('/admin/vol/{vol}/updateOrg', [AdminVolunteerController::class, 'updateOrg'])->name('admin.volunteers.updateOrg');
     Route::delete('/admin/vol/{vol}/delete', [AdminVolunteerController::class, 'destroy'])->name('admin.volunteers.destroy');
+});
+
+Route::middleware(['auth', 'role:Administrator'])->group(function () {
+    Route::get('/org/admin', [AdminOrganizationController::class, 'index'])->name('admin.organizations');
+    Route::put('/admin/org/{org}/updateType', [AdminOrganizationController::class, 'updateType'])->name('admin.organizations.updateType');
+    Route::delete('/admin/org/{org}/delete', [AdminOrganizationController::class, 'destroy'])->name('admin.organizations.destroy');
 });
 
 Route::middleware(['auth', 'role:Administrator'])->group(function () {

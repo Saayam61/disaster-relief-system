@@ -30,6 +30,7 @@
         <a href="{{ route('admin.users') }}"><i class="fas fa-users"></i> Users</a>
         <a href="{{ route('admin.reliefcenters') }}"><i class="fa-solid fa-house-chimney-medical"></i> Relief Centers</a>
         <a href="{{ route('admin.volunteers') }}"><i class="fas fa-hands-helping"></i> Volunteers</a>
+        <a href="{{ route('admin.organizations') }}"><i class="fa-solid fa-building-ngo"></i> Organizations</a>
         <a href="{{ route('admin.contributions') }}"><i class="fas fa-box"></i> Contributions</a>
         <a href="{{ route('admin.requests') }}"><i class="fas fa-hand-holding-heart"></i> Requests</a>
         <a href="{{ route('admin.posts') }}"><i class="fas fa-newspaper"></i> Posts</a>
