@@ -45,25 +45,22 @@ class HomeController extends Controller
         return redirect()->back()->with('success', 'User info updated successfully!');
     }
 
-    public function updateProfile(Request $request)
+    public function updateOrg(Request $request)
     {
         $user = Auth::user();
         $organizations = $user->organizations ?? new Organization(['user_id' => $user->user_id]);
 
         $request-> validate([
-            'type' => 'required|in:i/ngo, private',
-            'is_verified' => 'required|integer|min:',
+            'total_volunteers' => 'required|integer|min:0',
+            'type' => 'required|in:i/ngo,private',
+            'is_active' => 'required',
         ]);
 
         $organizations->fill($request->only([
-            'address',
-            'capacity',
-            'current_occupancy',
             'total_volunteers',
-            'total_supplies',
-            'contact_numbers',
+            'type',
         ]));
-        $organizations->is_active = $request->input('is_active', 0);
+        $organizations->is_active = $request->input('is_active', 1);
         $organizations->save();
 
         return redirect()->back()->with('success', 'Organization profile updated successfully!');

@@ -11,7 +11,8 @@ class Organization extends Model
     protected $fillable = [
         'user_id',
         'type',
-        'is_verified',
+        'total_volunteers',
+        'is_active',
     ];
 
     /**

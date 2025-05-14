@@ -33,7 +33,7 @@
             <h4>Edit Your Account Details</h4>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{ route('profile.updateUser') }}">
+            <form method="POST" action="{{ route('org.updateUser') }}">
                 @csrf
                 <div class="row g-3 mb-3">
                     <div class="col-md-2">
@@ -87,66 +87,38 @@
     <!-- Full User Info Edit Section -->
     <div class="card shadow-sm mb-4">
         <div class="card-header">
-            <h4>Edit Your Center Profile</h4>
+            <h4>Edit Your Organization Profile</h4>
         </div>
         <div class="card-body">
             @php
-                $reliefCenter = Auth::user()->reliefCenter ?? null;
+                $org = Auth::user()->organizations ?? null;
             @endphp
-            <form method="POST" action="{{ route('profile.updateProfile') }}">
+            <form method="POST" action="{{ route('org.updateOrg') }}">
                 @csrf
                 <div class="row g-3 mb-3">
                     <div class="col-md-6">
-                        <label>Address</label>
-                        <input type="text" name="address" class="form-control" value="{{ $reliefCenter->address ?? '' }}">
-                        @error('address')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="col-md-6">
-                        <label>Capacity</label>
-                        <input type="number" name="capacity" class="form-control" value="{{ $reliefCenter->capacity ?? '' }}">
-                        @error('capacity')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="col-md-6">
-                        <label>Current Occupancy</label>
-                        <input type="number" name="current_occupancy" class="form-control" value="{{ $reliefCenter->current_occupancy ?? '' }}">
-                        @error('current_occupancy')
+                        <label>Type</label>
+                        <select name="type" class="form-select">
+                            <option value="">Select Type</option>
+                            <option value="i/ngo" {{ (old('type', $org->type ?? '') === 'i/ngo') ? 'selected' : '' }}>I/NGO</option>
+                            <option value="private" {{ (old('type', $org->type ?? '') === 'private') ? 'selected' : '' }}>Private</option>
+                        </select>
+                        @error('type')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="col-md-6">
                         <label>Total Volunteers</label>
-                        <input type="number" name="total_volunteers" class="form-control" value="{{ $reliefCenter->total_volunteers ?? '' }}">
+                        <input type="number" name="total_volunteers" class="form-control" value="{{ $org->total_volunteers ?? '' }}">
                         @error('total_volunteers')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="col-md-12">
-                        <label>Total Supplies</label>
-                        <textarea name="total_supplies" class="form-control" rows="5">{{ $reliefCenter->total_supplies ?? '' }}</textarea>
-                        @error('total_supplies')
-                            <span class="text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="col-md-6">
-                        <label>Contact Numbers</label>
-                        <input type="text" name="contact_numbers" class="form-control" value="{{ $reliefCenter->contact_numbers ?? '' }}">
-                        @error('contact_numbers')
                             <span class="text-danger">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="form-check">
                         <input type="hidden" name="is_active" value="0">
-                        <input type="checkbox" id="is_active" name="is_active" class="form-check-input" value="1"{{ old('is_active', optional($reliefCenter)->is_active) ? 'checked' : '' }}>
+                        <input type="checkbox" id="is_active" name="is_active" class="form-check-input" value="1"{{ old('is_active', optional($org)->is_active) ? 'checked' : '' }}>
                         <label class="form-check-label" for="is_active">Is Active</label>
                     </div>
                 </div>

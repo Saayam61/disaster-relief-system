@@ -6,6 +6,12 @@ use App\Http\Controllers\API\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FloodAlertController;
+
+    // Route::get('check-flood', [FloodAlertController::class, 'checkFlood']);
+
+Route::middleware(['auth', 'role:Administrator'])->group(function () {
+});
 
 // Registration route
 Route::post('/register', [RegisterController::class, 'register']);

@@ -30,7 +30,7 @@ return new class extends Migration
         Schema::create('flood_alerts', function (Blueprint $table) {
             $table->id('alert_id');
             $table->foreignId('admin_id')->constrained('users', 'user_id')->onDelete('cascade');
-            $table->string('location');
+            $table->string('message');
             $table->string('severity');
             $table->text('description')->nullable();
             $table->timestamp('timestamp')->useCurrent();
@@ -55,8 +55,9 @@ return new class extends Migration
         Schema::create('organizations', function (Blueprint $table) {
             $table->id('org_id');
             $table->foreignId('user_id')->constrained('users', 'user_id')->onDelete('cascade');
-            $table->enum('type', ['ngo', 'ingo']);
-            $table->boolean('is_verified')->default(false);
+            $table->enum('type', ['i/ngo', 'private']);
+            $table->integer('total_volunteers');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
 
@@ -126,11 +127,6 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->index('email');
         });
-
-        Schema::table('flood_alerts', function (Blueprint $table) {
-            $table->index('location');
-        });
-
 
         Schema::table('communications', function (Blueprint $table) {
             $table->index('timestamp');

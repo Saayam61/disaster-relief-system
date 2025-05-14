@@ -20,6 +20,8 @@
                 <li class="nav-item">
                     @if(Auth::user()->role === 'Administrator')
                         <a class="nav-link" href="{{ route('admin.home') }}"><i class="fas fa-home me-1"></i> Home</a>
+                    @elseif(Auth::user()->role === 'Organization')
+                        <a class="nav-link" href="{{ route('org.home') }}"><i class="fas fa-home me-1"></i> Home</a>
                     @else
                         <a class="nav-link" href="{{ route('home') }}"><i class="fas fa-home me-1"></i> Home</a>
                     @endif                
@@ -39,11 +41,46 @@
                             </form>
                             </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link action-icon" href="#">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link action-icon" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fas fa-bell"></i>
-                                <span class="notification-badge">3</span>
+                                @if(Auth::user()->unreadNotifications->count() > 0)
+                                    <span class="notification-badge">{{ Auth::user()->unreadNotifications->count() }}</span>
+                                @endif
                             </a>
+                            
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown" style="min-width: 300px;">
+                                <!-- Dropdown Header -->
+                                <li class="dropdown-header">
+                                    <strong>Flood Alerts</strong>
+                                </li>
+                                
+                                <!-- Notifications List -->
+                                @forelse(auth()->user()->unreadNotifications->take(5) as $notification)
+                                    <li>
+                                        <a class="dropdown-item d-flex align-items-start" href="{{ route('notifications.read', $notification->id) }}">
+                                            <div>
+                                                <small class="text-muted">{{ $notification->created_at->diffForHumans() }}</small><br>
+                                                <span>{{ $notification->data['message'] ?? 'New flood alert!' }}</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                @empty
+                                    <li>
+                                        <span class="dropdown-item text-muted">No new alerts</span>
+                                    </li>
+                                @endforelse
+
+                                <!-- Divider -->
+                                <li><hr class="dropdown-divider"></li>
+
+                                <!-- View All Notifications Link -->
+                                <li>
+                                    <a style="background-color: white;" class="dropdown-item text-center" href="{{ route('notifications.index') }}">
+                                        <strong>View all</strong>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link action-icon" href="#">

@@ -100,12 +100,28 @@
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <div>
                                                     <h5 class="d-flex align-items-center">
+                                                        @if ($user->role === 'Relief Center')
                                                         <a href="{{ route('contribution.index', [$user->user_id]) }}">
                                                             <div class="d-flex align-items-center">
                                                                 <img src="{{ Auth::user()->avatar ?? 'https://ui-avatars.com/api/?name='.urlencode($user->name).'&color=FFFFFF&background=263749' }}" class="user-avatar">
                                                             <span class="badge bg-success">{{ $user->name }}</span>
                                                             </div>
                                                         </a>
+                                                        @elseif ($user->role === 'Organization')
+                                                        <a href="{{ route('contributions.index', [$user->user_id]) }}">
+                                                            <div class="d-flex align-items-center">
+                                                                <img src="{{ Auth::user()->avatar ?? 'https://ui-avatars.com/api/?name='.urlencode($user->name).'&color=FFFFFF&background=263749' }}" class="user-avatar">
+                                                            <span class="badge bg-success">{{ $user->name }}</span>
+                                                            </div>
+                                                        </a>
+                                                        @else
+                                                        <a href="{{ route('contributionv.index', [$user->user_id]) }}">
+                                                            <div class="d-flex align-items-center">
+                                                                <img src="{{ Auth::user()->avatar ?? 'https://ui-avatars.com/api/?name='.urlencode($user->name).'&color=FFFFFF&background=263749' }}" class="user-avatar">
+                                                            <span class="badge bg-success">{{ $user->name }}</span>
+                                                            </div>
+                                                        </a>
+                                                        @endif
                                                         <span class="ms-5"><i class="fa-solid fa-location-dot"></i></i>
                                                                 {{ $user->address }}
                                                         </span>

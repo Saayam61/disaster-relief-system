@@ -22,20 +22,20 @@
 
 <div id="main-content" class="main-content">
     <div class="container-fluid">
-{{-- Only show add buttons if current user is viewing their own page --}}
-@if(Auth::check() && Auth::id() === $user->user_id && Auth::user()->role === 'Relief Center')
-    <div class="card d-flex my-4 p-3">
-        <h1 class="h3">New Supplies</h1>
-        <div>
-            <a href="{{ route('contribution.donation') }}" class="btn btn-success me-2">
-                + Add New Donation
-            </a>
-            <a href="{{ route('contribution.receive') }}" class="btn btn-primary">
-                + Add New Received
-            </a>
+    {{-- Only show add buttons if current user is viewing their own page --}}
+    @if(Auth::check() && Auth::id() === $user->user_id && Auth::user()->role === 'Relief Center')
+        <div class="card d-flex my-4 p-3">
+            <h1 class="h3">New Supplies</h1>
+            <div>
+                <a href="{{ route('contribution.donation') }}" class="btn btn-success me-2">
+                    + Add New Donation
+                </a>
+                <a href="{{ route('contribution.receive') }}" class="btn btn-primary">
+                    + Add New Received
+                </a>
+            </div>
         </div>
-    </div>
-@endif
+    @endif
 
         
         <!-- Supplies Log Table -->
@@ -121,7 +121,7 @@
                                                     {{ $contribution->volunteer->user->name ?? 'Unknown' }}
                                                 @elseif($contribution->org_id)
                                                     <span class="badge bg-info text-dark">Organization</span>
-                                                    {{ $contribution->organization->user->org_name ?? 'Unknown' }}
+                                                    {{ $contribution->organization->user->name ?? 'Unknown' }}
                                                 @else
                                                     <span class="badge bg-secondary">Unknown</span>
                                                 @endif
@@ -134,7 +134,7 @@
                                         @php
                                             $reliefCenter = Auth::user()->reliefCenter ?? null;
                                         @endphp
-                                            @if($reliefCenter->center_id === $contribution->center_id)
+                                            @if(Auth::user()->role === 'Relief Center' && $reliefCenter->center_id === $contribution->center_id)
                                                 <div class="btn-group">
                                                     @if($contribution->type === 'donated')
                                                         <a href="{{ route('contribution.editDonation', $contribution->contribution_id) }}" class="btn btn-sm btn-warning me-2">

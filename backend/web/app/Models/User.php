@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Model;
 use Laravel\Sanctum\HasApiTokens;
+
 
 class User extends Authenticatable
 {
@@ -63,12 +63,12 @@ class User extends Authenticatable
 
     public function organizations()
     {
-        return $this->hasOne(Organization::class);
+        return $this->hasOne(Organization::class, 'user_id');
     }
 
     public function volunteer()
     {
-        return $this->hasOne(Volunteer::class);
+        return $this->hasOne(Volunteer::class, 'user_id');
     }
 
     public function contributions()
@@ -90,4 +90,15 @@ class User extends Authenticatable
     {
         return in_array($this->role, ['Relief Center']);
     }
+
+    public function notifications()
+    {
+        return $this->morphMany(\Illuminate\Notifications\DatabaseNotification::class, 'notifiable', 'notifiable_type', 'notifiable_id', 'user_id');
+    }
+
+    public function unreadNotifications()
+    {
+        return $this->notifications()->whereNull('read_at');
+    }
+
 }

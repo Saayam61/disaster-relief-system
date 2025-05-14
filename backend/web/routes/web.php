@@ -15,9 +15,22 @@ use App\Http\Controllers\Admin\VolunteerController as AdminVolunteerController;
 use App\Http\Controllers\Admin\ContributionController as AdminContributionController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\RequestController as AdminRequestController;
+use App\Http\Controllers\Organization\HomeController as OrgHomeController;
+use App\Http\Controllers\Organization\VolunteerController as OrgVolunteerController;
+use App\Http\Controllers\Organization\ContributionController as OrgContributionController;
+use App\Http\Controllers\VContributionController as VolContributionController;
+use App\Http\Controllers\RiverController;
+use App\Http\Controllers\FloodAlertController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
+// Route::get('/river', [RiverController::class, 'fetchRiversData'])->name('river.fetch');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::get('/notifications/{id}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
+});
 
 Auth::routes([
     'register' => false, // Disable public registration
@@ -25,6 +38,20 @@ Auth::routes([
 
 
 Route::post('/update-location', [LocationController::class, 'updateLocation'])->middleware('auth');
+
+// Search Resource Routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/search', [SearchController::class, 'index'])->name('search');
+    Route::post('/search', [SearchController::class, 'search'])->name('search.perform');
+});
+
+// News Feed Resource Routes
+Route::middleware(['auth'])->group(function () {
+    // Index - Show all posts (GET)
+    Route::get('/news-feed', [NewsFeedController::class, 'index'])
+        ->name('news-feed.index');
+});
+
 
 
 // Relief Center Routes
@@ -35,15 +62,9 @@ Route::middleware(['auth', 'role:Relief Center'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
 
-// Search Resource Routes
-Route::middleware(['auth'])->group(function () {
-    Route::get('/search', [SearchController::class, 'index'])->name('search');
-    Route::post('/search', [SearchController::class, 'search'])->name('search.perform');
-});
-
-Route::middleware(['auth'])->group(function () {
-    Route::post('/profile/update-profile', [HomeController::class, 'updateProfile'])->name('profile.updateProfile');
-    Route::post('/profile/update-user', [HomeController::class, 'updateUser'])->name('profile.updateUser');
+Route::middleware(['auth', 'role: Relief Center'])->group(function () {
+    Route::post('/relief_center/update-center', [HomeController::class, 'updateCenter'])->name('relief_center.updateCenter');
+    Route::post('/relief_center/update-user', [HomeController::class, 'updateUser'])->name('relief_center.updateUser');
 });
 
 // Contributions Resource Routes
@@ -81,7 +102,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Volunteers Resource Routes
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'role:Relief Center'])->group(function () {
     // Index - Show all volunteers (GET)
     Route::get('/volunteer', [VolunteerController::class, 'index'])
         ->name('volunteer.index');
@@ -100,7 +121,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // Request Resource Routes
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'role:Relief Center'])->group(function () {
     // Index - Show all requests (GET)
     Route::get('/request', [RequestController::class, 'index'])
         ->name('request.index');
@@ -114,15 +135,8 @@ Route::middleware(['auth'])->group(function () {
         ->name('request.destroy');
 });
 
-// News Feed Resource Routes
-Route::middleware(['auth'])->group(function () {
-    // Index - Show all posts (GET)
-    Route::get('/news-feed', [NewsFeedController::class, 'index'])
-        ->name('news-feed.index');
-});
-
 // Profile Resource Routes
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'role:Relief Center'])->group(function () {
     // Index - Show all posts (GET)
     Route::get('/profile', [ProfileController::class, 'index'])
         ->name('profile.index');
@@ -158,6 +172,10 @@ Route::middleware(['auth', 'role:Administrator'])->group(function () {
     Route::get('/home/admin', [AdminHomeController::class, 'index'])->name('admin.home');
 });
 
+Route::middleware(['auth', 'role: Administrator'])->group(function () {
+    Route::post('/admin/update-user', [AdminHomeController::class, 'updateUser'])->name('admin.updateUser');
+});
+
 Route::middleware(['auth', 'role:Administrator'])->group(function () {
     Route::get('/users/admin', [AdminUserController::class, 'index'])->name('admin.users');
     Route::delete('/admin/users/{user}', [AdminUserController::class, 'destroy'])->name('admin.users.destroy');
@@ -188,4 +206,57 @@ Route::middleware(['auth', 'role:Administrator'])->group(function () {
 Route::middleware(['auth', 'role:Administrator'])->group(function () {
     Route::get('/requests/admin', [AdminRequestController::class, 'index'])->name('admin.requests');
     Route::delete('/admin/requests/{req}', [AdminRequestController::class, 'destroy'])->name('admin.requests.destroy');
+});
+
+Route::middleware(['auth', 'role:Administrator'])->group(function () {
+    Route::get('/alerts/admin', [FloodAlertController::class, 'index'])->name('admin.alerts');
+    Route::get('/check-flood/admin', [FloodAlertController::class, 'checkFlood'])->name('admin.checkFloods');
+    Route::delete('/admin/alerts/{alert}', [FloodAlertController::class, 'destroy'])->name('admin.alerts.destroy');
+});
+
+
+
+// Organization Routes
+
+
+
+Route::middleware(['auth', 'role:Organization'])->group(function () {
+    Route::get('/home/organization', [OrgHomeController::class, 'index'])->name('org.home');
+});
+
+Route::middleware(['auth', 'role:Organization'])->group(function () {
+    Route::post('/org/update-org', [OrgHomeController::class, 'updateOrg'])->name('org.updateOrg');
+    Route::post('/org/update-user', [OrgHomeController::class, 'updateUser'])->name('org.updateUser');
+});
+
+
+// Volunteers Resource Routes
+Route::middleware(['auth', 'role:Organization'])->group(function () {
+    Route::get('/volunteer/org', [OrgVolunteerController::class, 'index'])
+        ->name('volunteers.index');
+    
+    Route::post('/org/volunteer/{volunteer}/approve', [OrgVolunteerController::class, 'approve'])
+        ->name('volunteers.approve');
+    
+    Route::post('/org/volunteer/{volunteer}/reject', [OrgVolunteerController::class, 'reject'])
+        ->name('volunteers.reject');
+    
+    Route::delete('/org/volunteer/{volunteer}', [OrgVolunteerController::class, 'destroy'])
+        ->name('volunteers.destroy');
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/contributions/org/{userId}', [OrgContributionController::class, 'index'])->name('contributions.index');
+    Route::delete('/org/contributions/{contribution}', [OrgContributionController::class, 'destroy'])->name('contributions.destroy');
+});
+
+
+
+// Volunteer Routes
+
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/contributions/vol/{userId}', [VolContributionController::class, 'index'])->name('contributionv.index');
+    Route::delete('/vol/contributions/{contribution}', [VolContributionController::class, 'destroy'])->name('contributionv.destroy');
 });

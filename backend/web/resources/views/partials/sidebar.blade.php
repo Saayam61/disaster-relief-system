@@ -12,16 +12,21 @@
     </div>
     <p class="text-center">{{ Auth::user()->name }}</p>
 
-    @if (Auth::user()->role !== 'Administrator')
+    @if (Auth::user()->role === 'Relief Center')
     <hr class="bg-light">
         <a href="{{ route('profile.index') }}"><i class="fas fa-user"></i>Profile</a>
         <a href="{{ route('contribution.index', [Auth::id()]) }}"><i class="fas fa-box"></i>Contribution</a>
         <a href="{{ route('volunteer.index') }}"><i class="fas fa-hands-helping"></i> Volunteers</a>
         <a href="{{ route('request.index') }}"><i class="fas fa-hand-holding-heart"></i> Requests</a>
         <a href="{{ route('news-feed.index') }}"><i class="fas fa-newspaper"></i> News Feed</a>
+    @elseif (Auth::user()->role === 'Organization')
+    <hr class="bg-light">
+        <a href="{{ route('contributions.index', [Auth::id()]) }}"><i class="fas fa-box"></i>Contribution</a>
+        <a href="{{ route('volunteers.index') }}"><i class="fas fa-hands-helping"></i> Volunteers</a>
+        <a href="{{ route('news-feed.index') }}"><i class="fas fa-newspaper"></i> News Feed</a>
     @else
-        <hr class="bg-light">
-        <a href=" route('admin.alerts') }}"><i class="fas fa-triangle-exclamation"></i> Alerts</a>
+    <hr class="bg-light">
+        <a href="{{ route('admin.alerts') }}"><i class="fas fa-triangle-exclamation"></i> Alerts</a>
         <a href="{{ route('admin.users') }}"><i class="fas fa-users"></i> Users</a>
         <a href="{{ route('admin.reliefcenters') }}"><i class="fa-solid fa-house-chimney-medical"></i> Relief Centers</a>
         <a href="{{ route('admin.volunteers') }}"><i class="fas fa-hands-helping"></i> Volunteers</a>

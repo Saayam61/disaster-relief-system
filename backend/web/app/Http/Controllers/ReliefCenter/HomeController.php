@@ -45,7 +45,7 @@ class HomeController extends Controller
         return redirect()->back()->with('success', 'User info updated successfully!');
     }
 
-    public function updateProfile(Request $request)
+    public function updateCenter(Request $request)
     {
         $user = Auth::user();
         $reliefCenter = $user->reliefCenter ?? new ReliefCenter(['user_id' => $user->user_id]);

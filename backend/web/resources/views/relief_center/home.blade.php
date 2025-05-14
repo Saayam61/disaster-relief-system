@@ -33,7 +33,7 @@
             <h4>Edit Your Account Details</h4>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{ route('profile.updateUser') }}">
+            <form method="POST" action="{{ route('relief_center.updateUser') }}">
                 @csrf
                 <div class="row g-3 mb-3">
                     <div class="col-md-2">
@@ -93,7 +93,7 @@
             @php
                 $reliefCenter = Auth::user()->reliefCenter ?? null;
             @endphp
-            <form method="POST" action="{{ route('profile.updateProfile') }}">
+            <form method="POST" action="{{ route('relief_center.updateCenter') }}">
                 @csrf
                 <div class="row g-3 mb-3">
 

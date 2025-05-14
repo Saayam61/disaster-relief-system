@@ -50,6 +50,9 @@ class LoginController extends Controller
         if ($user->role === 'Administrator') {
             return redirect('/home/admin');
         }
+        if ($user->role === 'Organization') {
+            return redirect('/home/organization');
+        }
         return redirect($this->redirectTo);
     }
 }

@@ -33,7 +33,7 @@
             <h4>Edit Your Account Details</h4>
         </div>
         <div class="card-body">
-            <form method="POST" action="{{ route('profile.updateUser') }}">
+            <form method="POST" action="{{ route('admin.updateUser') }}">
                 @csrf
                 <div class="row g-3 mb-3">
                     <div class="col-md-2">

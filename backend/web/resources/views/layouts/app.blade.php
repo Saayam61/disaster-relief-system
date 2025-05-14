@@ -142,6 +142,36 @@
             transform: translateY(-2px);
         }
 
+/* Notification Item */
+.dropdown-item {
+    padding: 12px 16px;
+    border-bottom: 1px solid #f1f1f1;
+    cursor: pointer; 
+    background-color:rgb(214, 221, 174);
+}
+
+/* Hover Effect on Notification Item */
+.dropdown-item:hover {
+    background-color: #f7f7f7;  /* Light gray background on hover */
+    color: rgb(111, 130, 3);  /* Change text color to blue on hover */
+}
+
+/* No New Alerts */
+.dropdown-item.text-muted {
+    color: #6c757d;  /* Subtle gray text for no new alerts message */
+    font-style: italic;  /* Italics to emphasize the message */
+}
+
+.dropdown-header {
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px 16px;
+    background-color:rgb(203, 146, 146);  
+    border-bottom: 1px solid #f1f1f1;  
+    color: rgb(48, 66, 81);
+}
+
+
         footer{
             background-color: rgb(38, 55, 73);
             color: #ccc;
