@@ -26,6 +26,12 @@
             z-index: 1020;
             transition: all 0.3s;
         }
+
+        /* .navbar-brand>img{
+            max-width: 150px;
+            max-height: 50px;
+            object-fit: cover;
+        } */
     
         .sidebar {
             background-color: #343a40;
@@ -143,35 +149,33 @@
             transform: translateY(-2px);
         }
 
-/* Notification Item */
-.dropdown-item {
-    padding: 12px 16px;
-    border-bottom: 1px solid #f1f1f1;
-    cursor: pointer; 
-    background-color:rgb(214, 221, 174);
-}
+        /* Notification Item */
+        .dropdown-item.notification {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f1f1f1;
+            cursor: pointer; 
+            background-color:rgb(214, 221, 174);
+        }
 
-/* Hover Effect on Notification Item */
-.dropdown-item:hover {
-    background-color: #f7f7f7;  /* Light gray background on hover */
-    color: rgb(111, 130, 3);  /* Change text color to blue on hover */
-}
+        .dropdown-item.notification:hover {
+            background-color: #f7f7f7;  
+            color: rgb(111, 130, 3); 
+        }
 
-/* No New Alerts */
-.dropdown-item.text-muted {
-    color: #6c757d;  /* Subtle gray text for no new alerts message */
-    font-style: italic;  /* Italics to emphasize the message */
-}
+        .dropdown-item.text-muted {
+            background-color: #f7f7f7;  
+            color: #6c757d;  
+            font-style: italic; 
+        }
 
-.dropdown-header {
-    font-weight: bold;
-    font-size: 16px;
-    padding: 10px 16px;
-    background-color:rgb(203, 146, 146);  
-    border-bottom: 1px solid #f1f1f1;  
-    color: rgb(48, 66, 81);
-}
-
+        .dropdown-header.notification {
+            font-weight: bold;
+            font-size: 16px;
+            padding: 10px 16px;
+            background-color:rgb(203, 146, 146);  
+            border-bottom: 1px solid #f1f1f1;  
+            color: rgb(48, 66, 81);
+        }
 
         footer{
             background-color: rgb(38, 55, 73);

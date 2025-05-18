@@ -5,8 +5,7 @@
         </button>
         
         <a class="navbar-brand" href="#">
-            <img src="/logo.png" alt="Logo" class="logo me-2">
-            <strong class="title">Disaster Relief System</strong>
+            <img src="/logo.png" alt="Logo" class="logo me-2 rounded" height="35px">
         </a>
         
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,14 +50,14 @@
                             
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationDropdown" style="min-width: 300px;">
                                 <!-- Dropdown Header -->
-                                <li class="dropdown-header">
+                                <li class="dropdown-header notification">
                                     <strong>Flood Alerts</strong>
                                 </li>
                                 
                                 <!-- Notifications List -->
-                                @forelse(auth()->user()->unreadNotifications->take(5) as $notification)
+                                @forelse(auth()->user()->unreadNotifications as $notification)
                                     <li>
-                                        <a class="dropdown-item d-flex align-items-start" href="{{ route('notifications.read', $notification->id) }}">
+                                        <a class="dropdown-item notification d-flex align-items-start" href="{{ route('notifications.read', $notification->id) }}">
                                             <div>
                                                 <small class="text-muted">{{ $notification->created_at->diffForHumans() }}</small><br>
                                                 <span>{{ $notification->data['message'] ?? 'New flood alert!' }}</span>
