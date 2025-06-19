@@ -22,6 +22,14 @@
 
 <div id="main-content" class="main-content">
     <div class="container-fluid">
+        <div class="card d-flex my-4 p-3">
+            <h1 class="h3">New User</h1>
+            <div>
+                <a href="{{ route('admin.users.formIndex') }}" class="btn btn-success me-2">
+                    + Add User
+                </a>
+            </div>
+        </div>
         <!-- Supplies Log Table -->
         <div class="card">
             <div class="card-header d-flex justify-content-between align-items-center">

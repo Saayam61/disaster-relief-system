@@ -1,3 +1,5 @@
+import 'package:app/models/contribution.dart';
+
 class User {
   final int userId;
   final String name;
@@ -7,6 +9,7 @@ class User {
   final String role;
   final double latitude;
   final double longitude;
+  final List<Contribution>? contribution;
 
   User({
     required this.userId,
@@ -17,6 +20,7 @@ class User {
     required this.role,
     required this.latitude,
     required this.longitude,
+    this.contribution,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -29,6 +33,11 @@ class User {
       role: json['role'],
       latitude: (json['latitude'] as num).toDouble(),
       longitude: (json['longitude'] as num).toDouble(),
+      contribution: json['contributions'] != null
+          ? (json['contributions'] as List)
+              .map((c) => Contribution.fromJson(c))
+              .toList()
+          : null, // 🛡️ Only parse if it exists
     );
   }
 

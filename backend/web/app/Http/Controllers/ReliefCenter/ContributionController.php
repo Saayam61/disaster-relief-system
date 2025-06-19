@@ -18,33 +18,33 @@ class ContributionController extends Controller
      * Display a listing of the contributions.
      */
     public function index(Request $request, $userId)
-{
-    $query = Contribution::with(['reliefCenter', 'organization', 'user', 'volunteer'])
-        ->orderBy('created_at', 'desc');
+    {
+        $query = Contribution::with(['reliefCenter', 'organization', 'user', 'volunteer'])
+            ->orderBy('created_at', 'desc');
 
-    // Filter by contribution type if provided
-    if ($request->has('type') && in_array($request->type, ['donated', 'received'])) {
-        $query->where('type', $request->type);
-    }
+        // Filter by contribution type if provided
+        if ($request->has('type') && in_array($request->type, ['donated', 'received'])) {
+            $query->where('type', $request->type);
+        }
 
-    // Filter by contributor type
-    if ($request->has('user_type')) {
-        $query->where(function ($q) use ($request) {
-            switch ($request->user_type) {
-                case 'user':
-                    $q->where('type', 'received')->whereNotNull('user_id');
-                    break;
-                case 'volunteer':
-                    $q->where('type', 'received')->whereNotNull('volunteer_id');
-                    break;
-                case 'organization':
-                    $q->where('type', 'received')->whereNotNull('org_id');
-                    break;
-                case 'relief_center':
-                    $q->where('type', 'donated')->whereNotNull('center_id');
-                    break;
-            }
-        });
+        // Filter by contributor type
+        if ($request->has('user_type')) {
+            $query->where(function ($q) use ($request) {
+                switch ($request->user_type) {
+                    case 'user':
+                        $q->where('type', 'received')->whereNotNull('user_id');
+                        break;
+                    case 'volunteer':
+                        $q->where('type', 'received')->whereNotNull('volunteer_id');
+                        break;
+                    case 'organization':
+                        $q->where('type', 'received')->whereNotNull('org_id');
+                        break;
+                    case 'relief_center':
+                        $q->where('type', 'donated')->whereNotNull('center_id');
+                        break;
+                }
+            });
     }
 
     $contributions = $query->where(function ($q) use ($userId) {

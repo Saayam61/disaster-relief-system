@@ -1,6 +1,7 @@
 import 'package:app/providers/contribution_provider.dart';
 import 'package:app/providers/newsfeed_provider.dart';
 import 'package:app/providers/request_provider.dart';
+import 'package:app/providers/search_provider.dart';
 import 'package:app/user/home_page.dart';
 import 'package:app/login.dart';
 import 'package:app/providers/notification_provider.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => NewsFeedProvider()),
         ChangeNotifierProvider(create: (_) => ContributionProvider()),
         ChangeNotifierProvider(create: (_) => RequestProvider()),
+        ChangeNotifierProvider(create: (_) => SearchProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -31,5 +32,58 @@ class HomeController extends Controller
         User::where('user_id', $user->user_id)->update($data);
 
         return response()->json(['success' => 'User info updated successfully!']);
+    }
+
+    public function search(Request $request)
+    {
+        $query = User::whereIn('role', ['Relief Center', 'Organization', 'Volunteer'])
+                    ->whereNot('user_id', Auth::id()); // also changed 'user_id' to 'id' assuming it's the primary key
+
+        // Location filter
+        $user = Auth::user();
+        if ($request->filled('radius')) {
+            $latitude = $user->latitude;
+            $longitude = $user->longitude;
+            $radius = $request->input('radius');
+        
+            $query->whereRaw("
+                (6371 * acos(
+                cos(radians(?)) 
+                * cos(radians(latitude)) 
+                * cos(radians(longitude) - radians(?))
+                + sin(radians(?)) 
+                * sin(radians(latitude))
+                )) < ?
+            ", [$latitude, $longitude, $latitude, $radius]);
+        }
+
+        // Text search if query is provided
+        if ($request->filled('query')) {
+            $searchTerm = $request->input('query');
+            $searchTerms = explode(' ', $searchTerm);
+
+            $query->where(function($q) use ($searchTerms) {
+                foreach ($searchTerms as $term) {
+                    if (strlen(trim($term))) {
+                        $q->orWhere('name', 'like', '%' . trim($term) . '%');
+                    }
+                }
+            });
+        }
+
+        // Role filter
+        if ($request->has('role') && in_array($request->role, ['Relief Center', 'Organization', 'Volunteer'])) {
+            $query->where('role', $request->role);
+        }
+
+        $results = $query->with('contributions')
+                        ->orderBy('name')
+                        ->get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Search results fetched successfully',
+            'data' => $results
+        ]);
     }
 }

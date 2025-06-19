@@ -6,16 +6,6 @@ import '../models/user.dart';
 class UserApi {
   final String baseUrl = 'http://localhost:8000/api';
 
-  Future<List<User>> fetchUsers() async {
-    final response = await http.get(Uri.parse('$baseUrl/users'));
-    if (response.statusCode == 200) {
-      List jsonResponse = json.decode(response.body);
-      return jsonResponse.map((user) => User.fromJson(user)).toList();
-    } else {
-      throw Exception('Failed to load users');
-    }
-  }
-
   Future<User> fetchCurrentUser() async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('login_token');

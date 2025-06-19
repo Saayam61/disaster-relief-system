@@ -179,6 +179,8 @@ Route::middleware(['auth', 'role: Administrator'])->group(function () {
 
 Route::middleware(['auth', 'role:Administrator'])->group(function () {
     Route::get('/users/admin', [AdminUserController::class, 'index'])->name('admin.users');
+    Route::get('/users/form/admin', [AdminUserController::class, 'formIndex'])->name('admin.users.formIndex');
+    Route::post('/users/create/admin', [AdminUserController::class, 'store'])->name('admin.users.create');
     Route::delete('/admin/users/{user}', [AdminUserController::class, 'destroy'])->name('admin.users.destroy');
 });
 

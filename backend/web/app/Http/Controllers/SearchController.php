@@ -13,7 +13,7 @@ class SearchController extends Controller
     {
         // Base query
         $query = User::whereIn('role', ['Relief Center', 'Organization', 'Volunteer'])
-                    ->whereNot('user_id', Auth::id()); // also changed 'user_id' to 'id' assuming it's the primary key
+                    ->whereNot('user_id', Auth::id());
 
         // Location filter
         $user = Auth::user();
@@ -116,7 +116,7 @@ class SearchController extends Controller
             $query->orderBy('name');
         }
 
-        $results = $query->paginate(10);
+        $results = $query->get();
 
         return view('search', [
             'results' => $results,

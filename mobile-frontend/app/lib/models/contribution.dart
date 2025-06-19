@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 
 class Contribution {
+  final String? userId;
   final String id;
   final DateTime createdAt;
   final String centerName;
@@ -13,6 +14,7 @@ class Contribution {
   final String type;
 
   Contribution({
+    this.userId,
     required this.id,
     required this.createdAt,
     required this.centerName,

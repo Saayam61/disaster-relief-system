@@ -15,21 +15,6 @@ class UserProvider with ChangeNotifier {
 
   final UserApi _userApi = UserApi();
 
-  Future<void> fetchUsers() async {
-    _isLoading = true;
-    _error = null;
-    notifyListeners();
-
-    try {
-      _users = await _userApi.fetchUsers();
-    } catch (e) {
-      _error = e.toString();
-    } finally {
-      _isLoading = false;
-      notifyListeners();
-    }
-  }
-
   Future<void> fetchCurrentUser() async {
     _isLoading = true;
     _error = null;

@@ -24,6 +24,20 @@ class ContributionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> getVolContributions() async {
+    _isLoading = true;
+    notifyListeners();
+    try {
+      // final fetched = await _contributionApi.getVolContributions();
+      // _contributions = fetched;
+    } catch (e, stacktrace) {
+      print('Error fetching contributions: $e');
+      print(stacktrace);
+    }
+    _isLoading = false;
+    notifyListeners();
+  }
+
   Future<void> deleteContribution(String id) async {
     try {
       await _contributionApi.deleteContribution(id);
