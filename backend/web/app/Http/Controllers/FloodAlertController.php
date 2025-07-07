@@ -103,7 +103,7 @@ class FloodAlertController extends Controller
                     $levelInfo = $this->getFloodLevel($pt['value'], $clean['thresholds']);
 
                     if ($levelInfo) {
-                        $message = $this->generateAlertMessage($levelInfo['level'], $pt['value'], $levelInfo['threshold']);
+                        $message = $this->generateAlertMessage($levelInfo['level'], $pt['value'], $levelInfo['threshold'], $distance);
                         
                         // Save only one flood alert for the river
                         FloodAlert::create([
@@ -192,17 +192,17 @@ class FloodAlertController extends Controller
         return null;
     }
 
-    private function generateAlertMessage($level, $value, $threshold)
+    private function generateAlertMessage($level, $value, $threshold, $distance)
     {
         switch ($level) {
             case 'max':
-                return "Extreme flood risk! Forecasted: $value, Threshold: $threshold. Evacuate ASAP!";
+                return "Extreme flood risk! Forecasted: $value, Threshold: $threshold. Evacuate ASAP!. Distance: $distance";
             case 'high':
-                return "Severe flood warning! Forecasted: $value, Threshold: $threshold. Prepare immediately.";
+                return "Severe flood warning! Forecasted: $value, Threshold: $threshold. Prepare immediately. Distance: $distance";
             case 'medium':
-                return "Moderate flood risk. Forecasted: $value, Threshold: $threshold. Stay alert.";
+                return "Moderate flood risk. Forecasted: $value, Threshold: $threshold. Stay alert. Distance: $distance";
             case 'low':
-                return "Minor flood possibility. Forecasted: $value, Threshold: $threshold. Be cautious.";
+                return "Minor flood possibility. Forecasted: $value, Threshold: $threshold. Be cautious. Distance: $distance";
             default:
                 return "No flood.";
         }
