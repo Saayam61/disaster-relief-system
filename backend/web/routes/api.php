@@ -7,6 +7,11 @@ use App\Http\Controllers\API\NewsFeedController;
 use App\Http\Controllers\API\ContributionController;
 use App\Http\Controllers\API\HomeController;
 use App\Http\Controllers\API\RequestController;
+use App\Http\Controllers\API\VContributionController;
+use App\Http\Controllers\API\CContributionController;
+use App\Http\Controllers\API\OContributionController;
+use App\Http\Controllers\API\ApplyController;
+use App\Http\Controllers\API\ChatController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -28,10 +33,23 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/search', [HomeController::class, 'search']);
+    Route::get('/search/chat', [HomeController::class, 'searchChat'])->name('search.chats');
+
+});
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/messages/chat/{receiverId}', [ChatController::class, 'chat'])->name('chats');
+    Route::post('/messages/send', [ChatController::class, 'send'])->name('sends');
+    Route::get('/messages/ui/{receiverId}', [ChatController::class, 'ui'])->name('uis');
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/updateUser', [HomeController::class, 'update']);
+});
+
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/volunteer', [HomeController::class, 'fetchCurrentVolunteer']);
+    Route::post('/updateVolunteer', [HomeController::class, 'updateVolunteer']);
 });
 
 Route::middleware('auth:sanctum')->get('/notifications', function (Request $request) {
@@ -53,7 +71,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('/applyCenter/{userId}', [ApplyController::class, 'indexCenter']);
+    Route::post('/applyOrg/{userId}', [ApplyController::class, 'indexOrg']);
+});
+
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('/contributions/user/', [ContributionController::class, 'indexUser']);
+    Route::get('/contributions/vol/{userId}', [VContributionController::class, 'index']);
+    Route::get('/contributions/center/{userId}', [CContributionController::class, 'index']);
+    Route::get('/contributions/org/{userId}', [OContributionController::class, 'index']);
     Route::delete('/contributions/{contribution}', [ContributionController::class, 'destroy']);
 });
 

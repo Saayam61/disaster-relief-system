@@ -1,6 +1,8 @@
+import 'package:app/chat.dart';
 import 'package:app/main_layout.dart';
 import 'package:app/models/user.dart';
 import 'package:app/org_contribution.dart';
+import 'package:app/providers/chat-provider.dart';
 import 'package:app/providers/search_provider.dart';
 import 'package:app/rc_contribution.dart';
 import 'package:app/vol_contribution.dart';
@@ -28,6 +30,7 @@ class _SearchPageState extends State<SearchPage> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       final provider = Provider.of<SearchProvider>(context, listen: false);
+      final chatProvider = Provider.of<ChatProvider>(context, listen: false);
       await provider.searchUsers();
       allUsers = provider.results;
 
@@ -98,11 +101,27 @@ class _SearchPageState extends State<SearchPage> {
           builder: (context) => OrgContribution(userId: userId),
         ));
         break;
-    }
   }
+}
+
+void _navigateToChat(User user, int userId, String userName) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (_) => ChangeNotifierProvider.value(
+        value: Provider.of<ChatProvider>(context, listen: false),
+        child: ChatPage(
+          receiverId: user.userId,
+          receiverName: user.name,
+        ),
+      ),
+    ),
+  );
+}
 
   @override
 Widget build(BuildContext context) {
+  final chatProvider = Provider.of<ChatProvider>(context);
   final isWideScreen = MediaQuery.of(context).size.width > 600;
 
   return MainLayout(
@@ -181,7 +200,7 @@ Widget build(BuildContext context) {
                         trailing: IconButton(
                           icon: const Icon(Icons.message, color: Colors.indigo),
                           onPressed: () {
-                            // Future chat screen navigation
+                            _navigateToChat(user, user.userId, user.name);
                           },
                         ),
                         onTap: () => _navigateToContribution(user, user.userId),

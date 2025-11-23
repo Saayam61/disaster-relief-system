@@ -41,5 +41,5 @@ class OrganizationController extends Controller
         $organization->delete();
 
         return redirect()->route('admin.organizations')->with('success', 'Organization info deleted successfully!');
-    }
+    } 
 }

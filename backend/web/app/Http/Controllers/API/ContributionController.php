@@ -19,7 +19,10 @@ class ContributionController extends Controller
         ->where('user_id', $userId)
         ->orderBy('created_at', 'desc')
         ->get();
-
+// Log::info('Contribution Query Result:', [
+//     'userId' => $userId,
+//     'contributions' => $contributions
+// ]);
         return response()->json([
             'data' => $contributions
         ]);

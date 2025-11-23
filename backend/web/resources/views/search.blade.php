@@ -133,7 +133,7 @@
                                                     </p>
                                                 </div>
                                                 <div>
-                                                    <a href=" route('messages.create', ['recipient_id' => $user->id]) }}" 
+                                                    <a href="{{ route('ui', $user->user_id) }}" 
                                                         class="badge bg-dark text-decoration-none fs-6">
                                                         <i class="fas fa-envelope"></i> Message
                                                     </a>

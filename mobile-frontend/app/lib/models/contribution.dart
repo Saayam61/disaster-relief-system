@@ -5,6 +5,7 @@ class Contribution {
   final String id;
   final DateTime createdAt;
   final String centerName;
+  final String? userName;
   final String? volName;
   final String? orgName;
   final String name;
@@ -18,6 +19,7 @@ class Contribution {
     required this.id,
     required this.createdAt,
     required this.centerName,
+    this.userName,
     this.volName,
     this.orgName,
     required this.name,
@@ -32,8 +34,9 @@ class Contribution {
       id: json['contribution_id'].toString(),
       createdAt: DateTime.parse(json['created_at']),
       centerName: json['relief_center']['user']['name'],
-      volName: json['volunteer']?['user']?['name'] ?? '-',
-      orgName: json['organization']?['user']?['name'] ?? '-',
+      userName: json['user']?['name'] ?? null,
+      volName: json['volunteer']?['user']?['name'] ?? null,
+      orgName: json['organization']?['user']?['name'] ?? null,
       name: json['name'],
       quantity: json['quantity'],
       unit: json['unit'],

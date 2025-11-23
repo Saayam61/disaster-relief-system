@@ -63,6 +63,12 @@ class VolunteerController extends Controller
         if ($volunteer->approval_status === 'pending') {
             $volunteer->approval_status = 'approved';
             $volunteer->save();
+            
+            $user = $volunteer->user; 
+            if ($user) {
+                $user->role = 'Volunteer';
+                $user->save();
+            }
         }
         return redirect()->back()->with('success', 'Volunteer approved successfully.');
     }

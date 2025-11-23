@@ -24,12 +24,40 @@ class ContributionProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getVolContributions() async {
+  Future<void> getVolContributions({required int userId}) async {
     _isLoading = true;
     notifyListeners();
     try {
-      // final fetched = await _contributionApi.getVolContributions();
-      // _contributions = fetched;
+      final fetched = await _contributionApi.getVolContributions(userId: userId);
+      _contributions = fetched;
+    } catch (e, stacktrace) {
+      print('Error fetching contributions: $e');
+      print(stacktrace);
+    }
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> getCenterContributions({required int userId}) async {
+    _isLoading = true;
+    notifyListeners();
+    try {
+      final fetched = await _contributionApi.getCenterContributions(userId: userId);
+      _contributions = fetched;
+    } catch (e, stacktrace) {
+      print('Error fetching contributions: $e');
+      print(stacktrace);
+    }
+    _isLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> getOrgContributions({required int userId}) async {
+    _isLoading = true;
+    notifyListeners();
+    try {
+      final fetched = await _contributionApi.getOrgContributions(userId: userId);
+      _contributions = fetched;
     } catch (e, stacktrace) {
       print('Error fetching contributions: $e');
       print(stacktrace);

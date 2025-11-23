@@ -27,7 +27,6 @@ class SearchApi {
 
     final response = await http.get(uri, headers: headers);
 
-  print(response.body); // Debugging line to check the response body
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       final List usersJson = data['data'];

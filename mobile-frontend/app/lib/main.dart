@@ -1,7 +1,9 @@
+import 'package:app/providers/chat-provider.dart';
 import 'package:app/providers/contribution_provider.dart';
 import 'package:app/providers/newsfeed_provider.dart';
 import 'package:app/providers/request_provider.dart';
 import 'package:app/providers/search_provider.dart';
+import 'package:app/providers/volapply_provider.dart';
 import 'package:app/user/home_page.dart';
 import 'package:app/login.dart';
 import 'package:app/providers/notification_provider.dart';
@@ -37,6 +39,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ContributionProvider()),
         ChangeNotifierProvider(create: (_) => RequestProvider()),
         ChangeNotifierProvider(create: (_) => SearchProvider()),
+        ChangeNotifierProvider(create: (_) => VolapplyProvider()),
+        ChangeNotifierProvider(create: (_) => ChatProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

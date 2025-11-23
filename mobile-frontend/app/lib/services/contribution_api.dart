@@ -27,7 +27,44 @@ class ContributionApi {
   final prefs = await SharedPreferences.getInstance();
   final token = prefs.getString('login_token');
     final response = await http.get(
-      Uri.parse('$baseUrl/contributions/user'),
+      Uri.parse('$baseUrl/contributions/vol/$userId'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+      },
+    );
+    if (response.statusCode == 200) {
+      final List<dynamic> data = json.decode(response.body)['data'];
+      return data.map((json) => Contribution.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to load contributions');
+    }
+  }
+
+  Future<List<Contribution>> getCenterContributions({required int userId}) async {
+  final prefs = await SharedPreferences.getInstance();
+  final token = prefs.getString('login_token');
+    final response = await http.get(
+      Uri.parse('$baseUrl/contributions/center/$userId'),
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+      },
+    );
+    if (response.statusCode == 200) {
+      print(response.body);
+      final List<dynamic> data = json.decode(response.body)['data'];
+      return data.map((json) => Contribution.fromJson(json)).toList();
+    } else {
+      throw Exception('Failed to load contributions');
+    }
+  }
+
+  Future<List<Contribution>> getOrgContributions({required int userId}) async {
+  final prefs = await SharedPreferences.getInstance();
+  final token = prefs.getString('login_token');
+    final response = await http.get(
+      Uri.parse('$baseUrl/contributions/org/$userId'),
       headers: {
         'Authorization': 'Bearer $token',
         'Accept': 'application/json',

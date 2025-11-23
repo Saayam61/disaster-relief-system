@@ -21,8 +21,11 @@ use App\Http\Controllers\Organization\VolunteerController as OrgVolunteerControl
 use App\Http\Controllers\Organization\ContributionController as OrgContributionController;
 use App\Http\Controllers\VContributionController as VolContributionController;
 use App\Http\Controllers\RiverController;
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\FloodAlertController;
 use App\Http\Controllers\NotificationController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
@@ -44,6 +47,14 @@ Route::post('/update-location', [LocationController::class, 'updateLocation'])->
 Route::middleware(['auth'])->group(function () {
     Route::get('/search', [SearchController::class, 'index'])->name('search');
     Route::post('/search', [SearchController::class, 'search'])->name('search.perform');
+    Route::get('/search/chat', [SearchController::class, 'searchChat'])->name('search.chat');
+});
+
+// Chat Resource Routes
+Route::middleware('auth')->group(function () {
+    Route::get('/messages/chat/{receiverId}', [ChatController::class, 'chat'])->name('chat');
+    Route::post('/messages/send', [ChatController::class, 'send'])->name('send');
+    Route::get('/messages/ui/{receiverId}', [ChatController::class, 'ui'])->name('ui');
 });
 
 // News Feed Resource Routes

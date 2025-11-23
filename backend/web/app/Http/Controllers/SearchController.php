@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Communication;
+use App\Models\Users;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -123,5 +125,25 @@ class SearchController extends Controller
             'searchParams' => $request->all(),
             'isInitialLoad' => false
         ]);
+    }
+
+    public function searchChat()
+    {
+        $currentUserId = Auth::id();
+
+        $users = User::join('communications as c', function ($join) use ($currentUserId) {
+            $join->on('users.user_id', '=', 'c.receiver_id')
+                ->where('c.sender_id', '=', $currentUserId)
+                ->orOn(function ($query) use ($currentUserId) {
+                    $query->on('users.user_id', '=', 'c.sender_id')
+                        ->where('c.receiver_id', '=', $currentUserId);
+                });
+        })
+        ->select('users.user_id', 'users.name', \DB::raw('MAX(c.timestamp) as last_message_time'))
+        ->groupBy('users.user_id', 'users.name')
+        ->orderByDesc('last_message_time')
+        ->get();
+        // dd($users);
+        return response()->json($users);
     }
 }

@@ -6,10 +6,44 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Models\Volunteer;
 use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
+    public function fetchCurrentVolunteer()
+    {
+        $user = Auth::user();
+        $vol = User::where('user_id', $user->user_id)->first();
+        $query = Volunteer::with(['reliefCenter.user', 'organization.user'])
+            ->orderBy('created_at', 'desc');
+        $volunteer = $query->where('user_id', $user->user_id)->get();
+        Log::info('Fetched current volunteer', ['user_id' => $user->user_id, 'data'=> $volunteer]);
+
+        return response()->json([$volunteer]);
+    }
+    public function updateVolunteer(Request $request)
+    {
+        $user = Auth::user();
+
+        $request->validate([
+            'skills' => 'required',
+            'availability' => 'required',
+            'status' => 'required',
+        ]);
+
+        $data = [
+            'skills' => $request->skills,
+            'availability' => $request->availability,
+            'status' => $request->status,
+        ];
+
+        // $user->save();
+        Volunteer::where('user_id', $user->user_id)->update($data);
+
+        return response()->json(['success' => 'Volunteer info updated successfully!']);
+    }
+
     public function update(Request $request)
     {
         $user = Auth::user();
@@ -85,5 +119,24 @@ class HomeController extends Controller
             'message' => 'Search results fetched successfully',
             'data' => $results
         ]);
+    }
+    public function searchChat()
+    {
+        $currentUserId = Auth::id();
+
+        $users = User::join('communications as c', function ($join) use ($currentUserId) {
+            $join->on('users.user_id', '=', 'c.receiver_id')
+                ->where('c.sender_id', '=', $currentUserId)
+                ->orOn(function ($query) use ($currentUserId) {
+                    $query->on('users.user_id', '=', 'c.sender_id')
+                        ->where('c.receiver_id', '=', $currentUserId);
+                });
+        })
+        ->select('users.user_id', 'users.name', \DB::raw('MAX(c.timestamp) as last_message_time'))
+        ->groupBy('users.user_id', 'users.name')
+        ->orderByDesc('last_message_time')
+        ->get();
+        // dd($users);
+        return response()->json($users);
     }
 }

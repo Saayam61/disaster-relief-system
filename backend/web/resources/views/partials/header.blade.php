@@ -82,9 +82,9 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link action-icon" href="#">
+                            <a class="nav-link action-icon" href="{{ route('ui', Auth::id()) }}?mark_delivered=true">
                                 <i class="fas fa-envelope"></i>
-                                <span class="notification-badge">1</span>
+                                <!-- <span class="notification-badge">1</span> -->
                             </a>
                         </li>
                     @endif

@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\Communication;
+use Illuminate\Container\Attributes\Log;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,7 +34,7 @@ class ChatController extends Controller
         })->orWhere(function ($q) use ($userId, $receiverId) {
             $q->where('sender_id', $receiverId)->where('receiver_id', $userId);
         })->orderBy('timestamp')->get();
-
+        \Illuminate\Support\Facades\Log::info("Marking messages as read for user $userId and receiver $receiverId, $messages");
         // Return JSON array of messages
         return response()->json($messages);
     }

@@ -1,10 +1,12 @@
 import 'package:app/about_us.dart';
-import 'package:app/user/contribution.dart';
+import 'package:app/chat.dart';
+import 'package:app/contribution.dart';
 import 'package:app/models/notification.dart';
 import 'package:app/providers/notification_provider.dart';
+import 'package:app/contribution.dart';
 import 'package:app/user/home_page.dart';
 import 'package:app/news_feed.dart';
-import 'package:app/user/request.dart';
+import 'package:app/request.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -225,15 +227,12 @@ class MainLayoutState extends State<MainLayout> {
       links.add(_buildSidebarLink('News Feed', Icons.newspaper));
       links.add(_buildSidebarLink('About Us', Icons.info));
     } else {
-      links.add(_buildSidebarLink('Alerts', Icons.warning));
-      links.add(_buildSidebarLink('Users', Icons.people));
-      links.add(_buildSidebarLink('Relief Centers', Icons.local_hospital));
-      links.add(_buildSidebarLink('Volunteers', Icons.handshake));
-      links.add(_buildSidebarLink('Organizations', Icons.business));
-      // links.add(_buildSidebarLink('Contributions', Icons.box));
-      // links.add(_buildSidebarLink('Requests', Icons.hand_holding_heart));
-      links.add(_buildSidebarLink('Posts', Icons.post_add));
+      links.add(_buildSidebarLink('Home', Icons.home));
+      links.add(_buildSidebarLink('Contributions', Icons.card_giftcard));
+      links.add(_buildSidebarLink('Requests', Icons.request_quote));
+      links.add(_buildSidebarLink('Chat', Icons.message));
       links.add(_buildSidebarLink('News Feed', Icons.newspaper));
+      links.add(_buildSidebarLink('About Us', Icons.info));
     }
     return links;
   }
@@ -268,13 +267,15 @@ class MainLayoutState extends State<MainLayout> {
   };
 
   final Map<String, Widget Function()> volunteerPageMap = {
-    // 'Alerts': () => VolunteerAlertsPage(),
-    // 'Users': () => VolunteerUsersPage(),
-    // 'Relief Centers': () => ReliefCentersPage(),
-    // 'Volunteers': () => VolunteerVolunteersPage(),
-    // 'Organizations': () => VolunteerOrganizationsPage(),
-    // 'Posts': () => VolunteerPostsPage(),
-    // 'News Feed': () => VolunteerNewsFeedPage(),
+        'Home': () => HomePage(),
+        'News Feed': () => NewsFeed(),
+        'About Us': () => AboutPage(),
+        'Requests': () => RequestPage(),
+        'Contributions': () => ContributionPage(),
+        'Chat': () => ChatPage(
+          receiverId: 0, // Placeholder, will be set in ChatPage
+          receiverName: '', // Placeholder, will be set in ChatPage
+        ),
   };
 
   Widget notificationBell(int unreadCount, BuildContext context, List<AppNotification> notifications) {

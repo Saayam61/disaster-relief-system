@@ -22,7 +22,7 @@ class LoginController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'Invalid credentials'
-            ], 401);
+            ], 404);
         }
 
         $user = User::where('email', $request->email)->first();
